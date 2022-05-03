@@ -8,7 +8,7 @@
 <form action="{% url 'login' %}" method = "POST" nonvalidate>
     {% csrf_token %}
     {{form}}
-
+    <input type="submit">
 </form> 
 
 

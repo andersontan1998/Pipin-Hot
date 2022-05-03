@@ -14,7 +14,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-
     is_customer = models.BooleanField(default=False)
     is_chef = models.BooleanField(default=False)
     is_deliverer = models.BooleanField(default=False)
@@ -24,31 +23,31 @@ class User(AbstractUser):
 
 class Customer(models.Model):
     user = models.OneToOneField(
-        User, unique=True, on_delete=models.CASCADE, primary_key=True)
+        User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     address = models.CharField(max_length=60)
-    account_funds = models.IntegerField()
+    account_funds = models.IntegerField(default=0)
 
 
 class Chef(models.Model):
     user = models.OneToOneField(
-        User, unique=True, on_delete=models.CASCADE, primary_key=True)
+        User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
     salary = models.BigIntegerField()
-    rating = models.IntegerField()
+    rating = models.IntegerField(default=0)
 
 
 class Deliverer(models.Model):
     user = models.OneToOneField(
-        User, unique=True, on_delete=models.CASCADE, primary_key=True)
+        User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
-    salary = models.BigIntegerField()
+    salary = models.BigIntegerField(default=0)
 
 
 class Manager(models.Model):
     user = models.OneToOneField(
-        User, unique=True, on_delete=models.CASCADE, primary_key=True)
+        User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     salary = models.BigIntegerField()
