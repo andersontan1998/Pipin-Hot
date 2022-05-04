@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+
+
+<body>
+
+    <h1>
+      
+    </h1>
+    <div>
+        <form action="{% url 'chef_register' %}" method="POST" novalidate>
+            {% csrf_token %}
+            {{form}}
+            <input type="submit">
+    </div>
+</body>
