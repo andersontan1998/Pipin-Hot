@@ -1,7 +1,7 @@
 from django.urls import path
-from reg_log import views
+from order_system import views
 
 urlpatterns = [
-    path("index", views.index, name='index'),
-    path("logout", views.logout_view, name="logout")
+    path("order", views.Order.as_view(), name='order'),
+    #path("logout", views.logout_view, name="logout")
 ]

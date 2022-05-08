@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('reg_log/', include("reg_log.urls")),
     path('forums/', include("forums.urls")),
+    path('order_system/', include("order_system.urls")),
     path('menu/', include("menu.urls"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
