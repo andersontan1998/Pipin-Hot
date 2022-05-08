@@ -1,0 +1,28 @@
+.foodContainer {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 35px;
+    flex-direction: row;
+}
+
+.foodContainer img {
+    width: auto;
+    height: 6vw;
+}
+
+body {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 35px;
+    flex-direction: column;
+}
+
+.logoContainer img {
+    width: 50%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
