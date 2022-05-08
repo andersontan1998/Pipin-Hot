@@ -1,5 +1,5 @@
 from django.urls import path
-from .import views
+from reg_log import views
 
 urlpatterns = [
     path("index", views.index, name='index'),

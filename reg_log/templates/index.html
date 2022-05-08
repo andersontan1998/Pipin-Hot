@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 
+<head>
+
+</head>
+<body>
+    <p1>
+        hi
+    </p1>
+    {% for forum in forum_posts_list %}
+
+    {{forum.post_user}}
+    {{forum.post_user.is_customer}}
+    {{forum.article_content}},
+    {{forum.subject}},
+    rating:{{forum.rating}}
+
+    {%endfor%}
+    
+
+
+</body>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+
 
 <head>
 
 </head>
 
 <body>
-    Inex page
-</body>
+    Index page dis one right
+</body> -->
