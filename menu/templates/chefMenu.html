@@ -8,75 +8,109 @@
 </head>
 <style>
     h1 {
-        font-size: 2.5vw;
+        margin-top: 2.5vw;
+        font-size: 2vw;
         font-family: "Garamond", serif;
         text-align: center;
     }
+
+    .button {
+        border: none;
+        color: rgb(20, 2, 2);
+        padding: 0.30vw 1.0vw;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1vw;
+        font-weight: bold;
+        font-family: Garamond, serif;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color:rgb(255, 75, 51)
+     }
+
 </style>
     
 <body>
 
+    <div class = "header">
+        <img src="{% static 'Pipin-Hot.png' %}"/>
+    </div>
     
-    <img src="{% static 'Pipin-Hot.png' %}"/>
     <h1> Menu Management </h1>
    
-
     <!--  comment here -->
     <div class = "foodContainer">
-        <div>
-            {% for item in foodList %}
-            
-                <u1 style = "list-style: none;">
-    
-                    <li style = "padding: 20px;"> 
-                        <p style = "display: inline; margin-right: 3vw;">
-                            <img src = "\media\uploads\Chicken-Quesadillas-2.jpg">
-                        </p>
-                    </li>
-    
-                </u1>
-            
-            {% endfor %}
-            </div>
 
-        <div>
-        {% for item in foodList %}
         
+        <div class = "pictureContainer">
+        {% for item in foodList %}
             <u1 style = "list-style: none;">
-
+                <li style = "padding: 20px;" >
+                    <img src = "{{ item.img.url }}">
+                </li>
+            </u1>
+        {% endfor %}
+        </div>
+        
+        <div class = "itemContainer">
+        {% for item in foodList %}
+            <u1 style = "list-style: none;">
                 <li style = "padding: 20px;"> 
-                    <p style = "display: inline; margin-right: 7vw;">
+                    <p class = "foodTitle">
                         {{ item.name }} 
                     </p>
+                    <p class = "foodInfo">
+                        ${{ item.price }}
+                    </p>
+                    <p style = "margin-left: 20px; display: inline;  font-size: 1.5vw; font-family: Garamond, serif;">
+                        <a href = "{% url 'deleteFood' item.name %}" class = "button"> Delete </a>
+                    </p>
+                    <p class = "foodDesc">
+                        {{ item.description }}
+                    </p>
+                    
                 </li>
-
             </u1>
-        
         {% endfor %}
         </div>
 
+        <!--
+
+        
         <div>
         {% for item in foodList %}
-        
             <u1 style = "list-style: none;">
-            
                 <li style = "padding: 20px;"> 
-                    
-                    <p style = "display: inline">
-                        {{ item.price }}
+                    <p class = "foodInfo">
+                        ${{ item.price }}
                     </p>
                 </li>
-
             </u1>
-        
         {% endfor %}
         </div>
+        
+
+        <div>
+            {% for item in foodList %}
+                <u1 style = "list-style: none;">
+                    <li style = "padding: 20px;"> 
+                        <p style = "display: inline; font-size: 1.5vw; font-family: Garamond, serif;">
+                            <a href = "{% url 'deleteFood' item.name %}" class = "button"> Delete </a>
+                        </p>
+                    </li>
+                </u1>
+            {% endfor %}
+        </div>
+        -->
+        
     
     </div>
     
     <form method = "post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_p }}
         <button type="submit">Add Item</button>
     </form>
 </body>
