@@ -2,13 +2,14 @@
     display: flex;
     align-items: center; 
     justify-content: center; 
-    padding: 35px;
+    padding: 3vw;
     flex-direction: row;
 }
 
 .foodContainer img {
-    width: auto;
-    height: 6vw;
+    width: 5.5vw;
+    height: auto;
+    display: inline;
 }
 
 body {
@@ -20,9 +21,48 @@ body {
 }
 
 .logoContainer img {
-    width: 50%;
+    width: 3vw;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.header img {
+    display: block;
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.foodTitle {
+    font-weight: bold; 
+    display: inline; 
+    margin-right: 2.75vw; 
+    font-size: 1.0vw; 
+    font-family: Garamond, serif;
+}
+
+.foodInfo {
+    display: inline; 
+    font-size: 0.9vw; 
+    font-family: Garamond, serif;
+}
+
+.foodDesc {
+    font-size: 0.9vw; 
+    font-family: Garamond, serif;
+    width: 20vw;
+    font-style: italic;
+}
+
+.itemContainer {
+    width: 30vw;
+    height: auto;
+}
+
+.pictureContainer {
+    width: 7vw;
+    height: auto;
 }
