@@ -1,0 +1,99 @@
+.header {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px 154px;
+    gap: 10px;
+    
+    position: absolute;
+    width: 100%;
+    height: auto;
+    left: 0px;
+    top: 56px;
+    
+    background: #ED411B;
+}
+
+div {
+    width: 100%;
+    height: auto;
+
+    font-family: 'Diplomata';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 5vw;
+    line-height: 5vw;
+    letter-spacing: 2px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-indent: 0px;
+    color: #FFFFFF;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.container {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 3vw;
+    flex-direction: row;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+
+    position: absolute;
+    left: 34.45%;
+    right: 34.45%;
+    top: 67.44%;
+    bottom: 9.88%;
+
+/* Black */
+    background: #1A1A1A;
+    border-radius: 4px;
+}
+
+ul {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+li {
+    float: left;
+}
+  
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: "Garamond", sans-serif;
+}
+
+li a:hover {
+    background-color: grey;
+}
+
+.active {
+    background-color: #04AA6D;
+  }
