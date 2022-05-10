@@ -22,3 +22,17 @@
     border-radius: 4px;
 }
 /* END BUTTON */
+
+.restaurantContainer {
+    align-items: center;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    margin-top: 10vw;
+}
+
+.restaurantContainer img {
+    align-items: center;
+    width: 60%;
+    height: auto;
+}

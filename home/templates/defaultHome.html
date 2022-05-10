@@ -27,10 +27,13 @@
         <ul>
             <li><a href="{% url 'ordersNav' %}">ORDER</a></li>
             <li><a href="{% url 'menuNav' %}">MENU</a></li>
+            <li><a href="{% url 'loginNav' %}">LOGIN</a></li>
         </ul>
     </nav>
 
-    <a href = "{% url 'loginButton' %}" class = "button"> Login </a>
+    <div class = "restaurantContainer">
+        <img src="{% static 'restaurant.jpg' %}"/>
+    </div>
 
 </body>
 </html>

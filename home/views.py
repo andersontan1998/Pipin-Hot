@@ -5,7 +5,7 @@ from django.contrib.auth import login
 def defaultHome(request):
     return render(request, 'defaultHome.html')
 
-def loginButton(request):
+def loginNav(request):
     return redirect('login')
 
 def ordersNav(request):
