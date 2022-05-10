@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Images</title>
+    <link rel = "stylesheet" href = "{% static '/css/chefMenu.css' %}">
+</head>
+<style>
+    h1 {
+        margin-top: 2.5vw;
+        font-size: 2vw;
+        font-family: "Garamond", serif;
+        text-align: center;
+    }
+</style>
+<body>
+        <div class = "header">
+            <img src="{% static 'Pipin-Hot.png' %}"/>
+        </div>
+
+        <div >
+            <h1>Order Submitted!</h1>
+            <p>You should receive a confirmation email soon.</p>
+            <a href="{% url 'index' %}">Go to the homepage</a>
+        </div>
+
+        <div>
+
+            {% for item in items.all %}
+            <p>{{ item.name }} <span class="pl-3">{{ item.price }}</span></p>
+            {% endfor %}
+
+        </div>
+</body>
+</html>
