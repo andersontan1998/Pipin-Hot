@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Dashboard</title>
+    <link rel = "stylesheet" href = "{% static '/css/usrDashboard.css' %}">
+</head>
+<style>
+    h1 {
+        margin-top: 2.5vw;
+        font-size: 2vw;
+        font-family: "Garamond", serif;
+        text-align: center;
+    }
+
+    hr.solid {
+        border-top: 3px solid #bbb;
+}   
+</style>
+<body>
+    <div class = "header">
+        <img src="{% static 'Pipin-Hot.png' %}"/>
+    </div>
+
+    <h1> Customer Dashboard </h1>
+
+    <div class = "profileContainer">
+
+        <p class = "profileText"> 
+            Name: 
+            <br> {{ user.first_name }} {{ user.last_name }} <br>
+            Address: <br> {{ user.address }} <br>
+            Account Funds: <br> {{ user.account_funds }} <br>
+            Warnings: <br> {{ user.warnings }} <br>
+            VIP Status:  <br> {{ user.is_vip }} <br>
+        </p>
+    </div>
+
+</body>
+</html>
