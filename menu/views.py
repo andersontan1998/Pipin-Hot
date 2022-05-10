@@ -5,21 +5,6 @@ from .models import FoodItem
 import os
   
 #Create your views here.
-def imgView(request):
-  
-    if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
-  
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = ImageForm()
-    return render(request, 'imageForm.html', {'form' : form})
-  
-def uploadok(request):
-    return HttpResponse(' upload successful')
-
 def custFoodView(request):
     form = FoodForm(request.POST, request.FILES)
     foodList = FoodItem.objects.all()
