@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'order_system',
     'forums',
     'menu',
-    'home'
+    'home',
+    'delivery'
 ]
 
 MIDDLEWARE = [

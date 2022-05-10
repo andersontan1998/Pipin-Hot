@@ -1,17 +1,78 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Order</title>
+    <title>Upload Images</title>
+    <link rel = "stylesheet" href = "{% static '/css/chefMenu.css' %}">
 </head>
+<style>
+    h1 {
+        margin-top: 2.5vw;
+        font-size: 2vw;
+        font-family: "Garamond", serif;
+        text-align: center;
+    }
+</style>
 <body>
-    YUUUR
+    <div class = "header">
+        <img src="{% static 'Pipin-Hot.png' %}"/>
+    </div>
 
-    {%for appet in Appetizer%}
+    <h1> Menu </h1>
 
-    {{appet.name}}
+    <form method="POST"> 
+        {% csrf_token %}
+        <div class = "foodContainer">
+            <!-- <div class = "pictureContainer">
+                {% for item in foodList %}
+                    <u1 style = "list-style: none;">
+                        <li style = "padding: 20px;" >
+                            <img src = "{{ item.img.url }}">
+                        </li>
+                    </u1>
+                {% endfor %}
+            </div> -->
+                <div>
+                {% for item in Appetizer.all %}
+                    <u1 style = "list-style: none;">
+                        <li style = "padding: 20px;"> 
+                            <p class = "foodTitle">
+                                {{ item.name }} 
+                            </p>
+                            <p class = "foodInfo">
+                                ${{ item.price }}
+                            </p>
+                            <p class = "foodDesc">
+                                {{ item.description }}
+                            </p>
+                            <input type="checkbox" name="items[]" value="{{ item.pk }}">
+                        </li>
+                    </u1>
+                {% endfor %}
+                </div>
+        <!--
+            <div style = "border-width: 5px; border-color: black;">
+            {% for item in foodList %}
+                <u1 style = "list-style: none;">
+                    <li style = "padding: 20px;"> 
+                        <p class = "foodInfo">
+                            ${{ item.price }}
+                        </p>
+                    </li>
+                </u1>
+            {% endfor %}
+            </div>
+        -->
+    </div>
+    <div >
+        <label for="name">Full Name</label>
+        <input type="text" placeholder="Your Name" name="name"/>
+    </div>
+        <button >Place Order!</button>
 
 
-    {%endfor%}
+    </form>
+
 </body>
 </html>

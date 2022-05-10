@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from order_system.models import OrderModel
 from menu.models import FoodItem
+import json
 # Create your views here.
 
 
@@ -10,7 +11,7 @@ class Order(View):
         # get every item from each category
 
         appetizer = FoodItem.objects.filter(
-            category__startswith='Appetizer')
+            category__startswith='Dinner')
 
         # pass into context
 
@@ -29,8 +30,8 @@ class Order(View):
         }
 
         items = request.POST.getlist('items[]')
-
-        for items in items:
+        print(items)
+        for item in items:
             menu_item = FoodItem.objects.get(pk=int(item))
             item_data = {
                 'id': menu_item.pk,
@@ -49,11 +50,23 @@ class Order(View):
 
         order = OrderModel.objects.create(price=price, name=name)
         order.items.add(*items_id)
+
+        return redirect("order_confirmation", pk=order.pk)
+
+
+class OrderConfirmation(View):
+    def get(self, request, pk, *args, **kwargs):
+        order = OrderModel.objects.get(pk=pk)
+
         context = {
-            'items': order_items['items']
+            'items': order.items,
+            'price': order.price,
+            'pk': order.pk
         }
 
+        return render(request, 'order_confirmation.html', context)
 
-# class OrderConfirmation(View):
-#     def get(self, rquest, pk, *args, **kwargs):
-#         order = OrderModel.objects.get(pk=pk)
+    # def post(self, request, pk, *args, **kwargs):
+    #     data = json.loads(request.body)
+
+    #     return redirect('payment-confirmation')
