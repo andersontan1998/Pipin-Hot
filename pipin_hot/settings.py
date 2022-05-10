@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'reg_log',
     'order_system',
     'forums',
-    'menu'
+    'menu',
+    'home'
 ]
 
 MIDDLEWARE = [
