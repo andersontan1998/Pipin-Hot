@@ -66,7 +66,7 @@ class OrderConfirmation(View):
 
         return render(request, 'order_confirmation.html', context)
 
-    def post(self, request, pk, *args, **kwargs):
-        data = json.loads(request.body)
+    # def post(self, request, pk, *args, **kwargs):
+    #     data = json.loads(request.body)
 
-        return redirect('payment-confirmation')
+    #     return redirect('payment-confirmation')
