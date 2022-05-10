@@ -1,0 +1,42 @@
+{%load static %}
+
+<!DOCTYPE html>
+
+<head>
+
+</head>
+<body>
+    <p1>
+        hi bum
+    </p1>
+    
+    {{review.order.name.all}}
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        {% for item in review.order.items.all %}
+
+        {{item.name}}
+        <div>
+            <label for="{{item.name}}">Review this Item</label>
+            <input type="hidden" name="items[]" value="{{ item.pk }}">
+            <input type="number" min= "0" max="10" name="{{ item.name}}" placeholder="Rate!">  
+            <select id="delivery_rating" name="review delivery">
+
+                <option value = 0>Complain</option>
+                <option value = 1>Compliment</option>
+                <option value = 2>Omit</option>
+            </select>      
+            <input type="text" placeholder="Rate delivery" name="delivery_description"/>
+        </div>
+    
+        {% endfor %} 
+        <input type="text" placeholder="What did you think" name="description"/>
+        <button>Submit</button>
+    </form>
+
+
+</body>
+
+
+
