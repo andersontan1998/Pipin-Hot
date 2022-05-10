@@ -1,6 +1,8 @@
 from django.urls import path
 from forums import views
 
+
 urlpatterns = [
-    path("index", views.index.as_view(), name='index')
+    path("all_orders", views.all_orders.as_view(), name='all_orders'),
+    path("review/<int:pk>", views.review.as_view(), name='review')
 ]

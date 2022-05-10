@@ -30,7 +30,6 @@ class Order(View):
         }
 
         items = request.POST.getlist('items[]')
-        print(items)
         for item in items:
             menu_item = FoodItem.objects.get(pk=int(item))
             item_data = {
