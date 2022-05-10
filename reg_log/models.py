@@ -12,7 +12,6 @@ from django.contrib.auth.models import AbstractUser
 #
 #
 
-
 class User(AbstractUser):
     is_customer = models.BooleanField(default=False)
     is_chef = models.BooleanField(default=False)
@@ -28,6 +27,8 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=30)
     address = models.CharField(max_length=60)
     account_funds = models.IntegerField(default=0)
+    warnings = models.IntegerField(default=0)
+    is_vip = models.BooleanField(default=False)
 
 
 class Chef(models.Model):

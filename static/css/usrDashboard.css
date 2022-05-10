@@ -1,0 +1,22 @@
+.profileContainer {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 3vw;
+    flex-direction: row;
+}
+
+.profileText {
+    font-size: 1.25vw;
+    font-family: "Garamond", serif;
+    font-weight: bold;
+    text-align: left;
+}
+
+.header img {
+    display: block;
+    width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
