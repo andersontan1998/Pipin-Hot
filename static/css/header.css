@@ -1,0 +1,77 @@
+/* PIPIN HOT HEADER */
+.header {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 5px 154px;
+    gap: 10px;
+    
+    position: absolute;
+    width: 100%;
+    height: auto;
+    left: 0px;
+    top: 45px;
+    
+    background: #ED411B;
+}
+
+div {
+    width: 100%;
+    height: auto;
+
+    font-family: 'Diplomata';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 5vw;
+    line-height: 5vw;
+    letter-spacing: 2px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-indent: 0px;
+    color: #FFFFFF;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+/* END PIPIN HOT HEADER */
+
+/* NAVIGATION BAR */
+ul {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+li {
+    float: left;
+}
+  
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: "Garamond", sans-serif;
+}
+
+li a:hover {
+    background-color: grey;
+}
+
+.active {
+    background-color: #43c1f3;
+  }
+/* END NAVIGATION BAR */
