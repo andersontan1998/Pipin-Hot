@@ -1,26 +1,10 @@
 /* PIPIN HOT HEADER */
-.header {
-    box-sizing: border-box;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 5px 154px;
-    gap: 10px;
-    
-    position: absolute;
+#header {
+    position: fixed;
     width: 100%;
     height: auto;
-    left: 0px;
     top: 45px;
-    
-    background: #ED411B;
-}
-
-div {
-    width: 100%;
-    height: auto;
+    left: 0px;
 
     font-family: 'Diplomata';
     font-style: normal;
@@ -31,18 +15,18 @@ div {
 
     display: flex;
     align-items: center;
-    text-align: center;
-    text-indent: 0px;
     color: #FFFFFF;
+    justify-content: center;
 
-    flex: none;
+    flex-direction: row;
     order: 0;
-    flex-grow: 0;
+
+    background-color: #ED411B;
 }
 /* END PIPIN HOT HEADER */
 
 /* NAVIGATION BAR */
-ul {
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -54,11 +38,11 @@ ul {
     background-color: white;
   }
   
-li {
+.navbar li {
     float: left;
 }
   
-li a {
+.navbar li a {
     display: block;
     color: black;
     text-align: center;
@@ -67,8 +51,12 @@ li a {
     font-family: "Garamond", sans-serif;
 }
 
-li a:hover {
+.navbar li a:hover {
     background-color: grey;
+}
+
+.navbar li:last-child {
+    float: right;
 }
 
 .active {

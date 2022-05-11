@@ -20,8 +20,6 @@
         PIPIN' HOT
     </div>
 
-    <h1> Home </h1>
-
     <nav>
         <ul>
             <li><a href="{% url 'ordersNav' %}">ORDER</a></li>
@@ -30,5 +28,8 @@
         </ul>
     </nav>
 
+    {% block content %}
+
+    {% endblock %} 
 </body>
 </html>
