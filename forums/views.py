@@ -10,7 +10,7 @@ from forums.models import Forum_Posts
 class index(generic.ListView):
     model = Forum_Posts
 
-    template_name = 'index.html'
+    template_name = 'forum.html'
 
     def get_queryset(self):
         return Forum_Posts.objects.all()
