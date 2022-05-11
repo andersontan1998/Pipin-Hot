@@ -15,14 +15,18 @@
     <div class="container">
         <div class="row justify-content-center mt-4">
             <div class="card col-md-5 mr-3">
-                <h4 class="text-center pt-2">Today's Total Income</h4>
+                <h4 class="text-center pt-2">Total Earned</h4>
                 <h1 class="text-center" style="color: green;">${{ total_revenue }}</h1>
             </div>
 
             <div class="card col-md-5 mr-3">
-                <h4 class="text-center pt-2">Today's Total Orders</h4>
+                <h4 class="text-center pt-2">Number of Orders</h4>
                 <h1 class="text-center" style="color: #ad9c00;">{{ total_orders }}</h1>
             </div>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <a href="{% url 'bidding' %}"><button>Bid For Orders</button></a>
         </div>
 
         <div class="row justify-content-center">
@@ -36,7 +40,7 @@
                             <th scope="col">Email</th>
                             <th scope="col">Address</th>
                             <th scope="col">Paid Status</th>
-                            <th scope="col">Highest Bid</th>
+                            <th scope="col">Lowest Bid</th>
                         </tr>
                     </thead>
 

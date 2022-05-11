@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'forums',
     'menu',
     'home',
-    'delivery'
+    'delivery',
+    'dashboard',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,34 @@
+{%load static %}
+
+<!DOCTYPE html>
+
+<head>
+
+</head>
+<body>
+    <p1>
+        hi bum
+    </p1>
+    {% for order in Orders %}
+
+    {{order.name}}
+    {{order.items.name}}
+
+    {% for item in order.items.all %}
+
+    {{item.name}}
+    {{item.img}}
+    {% endfor %} 
+    <form method="POST"> 
+        {% csrf_token %}
+        <input type="checkbox" name="order" value="{{ order.pk }}">
+        
+            <button>Review This One!</button>
+        
+    </form> 
+    
+    <br>
+
+    {%endfor%}
+
+</body>

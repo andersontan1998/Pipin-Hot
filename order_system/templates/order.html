@@ -33,6 +33,17 @@
                     </u1>
                 {% endfor %}
             </div> -->
+
+                <div class = "pictureContainer">
+                    {% for item in Appetizer.all %}
+                        <u1 style = "list-style: none;">
+                            <li style = "padding: 20px;" >
+                                <img src = "{{ item.img.url }}">
+                            </li>
+                        </u1>
+                    {% endfor %}
+                </div>
+
                 <div>
                 {% for item in Appetizer.all %}
                     <u1 style = "list-style: none;">
@@ -43,10 +54,14 @@
                             <p class = "foodInfo">
                                 ${{ item.price }}
                             </p>
+                            <p style = "display: inline; margin-left: 3vw;">
+                                <input type="checkbox" name="items[]" value="{{ item.pk }}">
+                            </p>
+                            
                             <p class = "foodDesc">
                                 {{ item.description }}
                             </p>
-                            <input type="checkbox" name="items[]" value="{{ item.pk }}">
+                            
                         </li>
                     </u1>
                 {% endfor %}
