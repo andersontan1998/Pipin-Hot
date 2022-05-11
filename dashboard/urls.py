@@ -6,6 +6,8 @@ from .views import *
 
 urlpatterns = [
         path('customer/', custDashboardView, name = 'cust_dashboard'),
+        path('editProfile/', editProfileView, name = 'edit_profile'),
+        path('editFunds/', addFundsView, name = 'edit_funds'),
 ]
 
 if settings.DEBUG:
