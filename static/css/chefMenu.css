@@ -20,17 +20,8 @@ body {
     flex-direction: column;
 }
 
-.logoContainer img {
-    width: 3vw;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.header img {
+.headerLogo {
     display: block;
-    width: 50%;
     height: auto;
     margin-left: auto;
     margin-right: auto;
