@@ -26,7 +26,25 @@ class deliveryUI(View):
             'total_orders': len(orders)
         }
 
-
-
         return render(request, '../templates/deliveryUI.html', context)
+        
+class biddingMenu(View):
+    def get(self, request, *args, **kwargs):
+
+        # get the current date
+        today = datetime.today()
+        orders = OrderModel.objects.filter(
+            created_on__year=today.year, created_on__month=today.month, created_on__day=today.day)
+
+
+        # pass total number of orders and total revenue into template
+        context = {
+            'orders': orders,
+        }
+
+        return render(request, '../templates/biddingMenu.html', context)
+
+
+#def biddingMenu(request):
+#    return render(request, '../templates/biddingMenu.html')
         

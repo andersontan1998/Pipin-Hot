@@ -16,3 +16,4 @@ class OrderModel(models.Model):
         User, on_delete=models.CASCADE, null=True, blank=True, default=None)
     email = models.CharField(max_length=50, blank=True)
     address = models.CharField(max_length=50, blank=True)
+    is_paid = models.BooleanField(default=False)
