@@ -22,10 +22,3 @@ class Review(models.Model):
     reviewed_by_manager = models.BooleanField(default=False)
     complainee = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
-
-
-class Complaint(models.Model):
-    complainee = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    subject = models.CharField(max_length=50)
-    description = models.CharField(max_length=100)
-    is_complaint = models.BooleanField(default=True)
