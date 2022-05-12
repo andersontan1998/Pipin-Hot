@@ -82,7 +82,11 @@
     </div>
     <div >
         <label for="name">Full Name</label>
-        <input type="text" placeholder="Your Name" name="name"/>
+        <input type="hidden" value="{{User.username}}" name="name"/>
+        <select name="logistic">
+            <option value="delivery"> Delivery </option>
+            <option value="pickup"> Pickup </option>
+        </select>
     </div>
         <button >Place Order!</button>
 

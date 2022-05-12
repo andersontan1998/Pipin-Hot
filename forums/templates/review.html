@@ -21,16 +21,29 @@
             <label for="{{item.name}}">Review this Item</label>
             <input type="hidden" name="items[]" value="{{ item.pk }}">
             <input type="number" min= "0" max="10" name="{{ item.name}}" placeholder="Rate!">  
-            <select id="delivery_rating" name="review delivery">
-
-                <option value = 0>Complain</option>
-                <option value = 1>Compliment</option>
-                <option value = 2>Omit</option>
-            </select>      
-            <input type="text" placeholder="Rate delivery" name="delivery_description"/>
-        </div>
     
         {% endfor %} 
+        {% if is_delivery %}
+            <select id="delivery_rating" name="review delivery">
+
+                <option value = "complain">Complain</option>
+                <option value = "compliment">Compliment</option>
+                <option value = "">Omit</option>
+            </select>      
+            <input type="number" placeholder="Rate delivery" name="rating_number"/>
+        </div>
+            {% else %}
+            <select id="chef_rating" name="review chef">
+
+                <option value = "complain">Complain</option>
+                <option value = "compliment">Compliment</option>
+                <option value = "">Omit</option>
+            </select>      
+            <input type="hidden" name="subject" value="{{item.chef_name}}"/>
+            <input type="number" placeholder="Rate delivery" name="rating_number"/>
+        </div>
+
+            {% endif %}
         <input type="text" placeholder="What did you think" name="description"/>
         <button>Submit</button>
     </form>

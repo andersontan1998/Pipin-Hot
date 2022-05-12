@@ -18,7 +18,10 @@ class Review(models.Model):
     rating = models.IntegerField(default=10, blank=True)
     is_complaint = models.BooleanField(default=False, blank=True)
     subject = models.CharField(max_length=40, blank=True)
+    description = models.CharField(max_length=100, blank=True)
     reviewed_by_manager = models.BooleanField(default=False)
+    complainee = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True)
 
 
 class Complaint(models.Model):
