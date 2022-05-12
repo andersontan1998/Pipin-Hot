@@ -22,11 +22,7 @@ class Order(View):
 
         context = {
             'Appetizer': appetizer,
-<<<<<<< HEAD
             'User': user
-=======
-            'user': cust
->>>>>>> 147462f0db99cc95dda7792d2cb2944a0411fd31
         }
         # render template
         return render(request, 'order.html', context)

@@ -12,12 +12,9 @@ class FoodItem(models.Model):
         max_length=300, default="No description given")
     quantity_ordered = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
-<<<<<<< HEAD
     chef_name = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=True, default=None)
-=======
     vip_exclusive = models.BooleanField(default=False)
->>>>>>> 147462f0db99cc95dda7792d2cb2944a0411fd31
 
 
 class Image(models.Model):
