@@ -7,5 +7,6 @@ urlpatterns = [
     path('loginNav', loginNav, name='loginNav'),
     path('ordersNav', ordersNav, name='ordersNav'),
     path('menuNav', menuNav, name='menuNav'),
-    path('forumNav', forumNav, name='forumNav')
+    path('forumNav', forumNav, name='forumNav'),
+    path('dashNav', dashNav, name='dashNav')
 ]

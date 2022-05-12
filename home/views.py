@@ -20,3 +20,6 @@ def menuNav(request):
 
 def forumNav(request):
     return redirect('forum')
+
+def dashNav(request):
+    return redirect('cust_dashboard')
