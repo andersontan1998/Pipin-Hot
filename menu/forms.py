@@ -9,4 +9,4 @@ class ImageForm(forms.ModelForm):
 class FoodForm(forms.ModelForm):
     class Meta:
         model = FoodItem
-        fields = ['name', 'price', 'img', 'category', 'description']
+        fields = ['name', 'price', 'img', 'category', 'description', 'vip_exclusive']
