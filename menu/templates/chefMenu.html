@@ -14,6 +14,13 @@
         text-align: center;
     }
 
+    h2 {
+        margin-top: 2.5vw;
+        font-size: 1.5vw;
+        font-family: "Garamond", serif;
+        text-align: center;
+    }
+
     .button {
         border: none;
         color: rgb(20, 2, 2);
@@ -34,28 +41,30 @@
     
 <body>
 
-    <div class = "header">
+    <div class = "headerLogo">
         <img src="{% static 'Pipin-Hot.png' %}"/>
     </div>
     
     <h1> Menu Management </h1>
-   
+
     <!--  comment here -->
     <div class = "foodContainer">
-
         
         <div class = "pictureContainer">
         {% for item in foodList %}
+            {% if item.vip_exclusive == False %}
             <u1 style = "list-style: none;">
                 <li style = "padding: 20px;" >
                     <img src = "{{ item.img.url }}">
                 </li>
             </u1>
+            {% endif %}
         {% endfor %}
         </div>
         
         <div class = "itemContainer">
         {% for item in foodList %}
+            {% if item.vip_exclusive == False %}
             <u1 style = "list-style: none;">
                 <li style = "padding: 20px;"> 
                     <p class = "foodTitle">
@@ -73,39 +82,52 @@
                     
                 </li>
             </u1>
+            {% endif %}
         {% endfor %}
         </div>
+    </div>
 
-        <!--
+    {% if user.is_vip == True %}
+    <h2> VIP Menu </h2>
+    {% endif %}
 
-        
-        <div>
-        {% for item in foodList %}
-            <u1 style = "list-style: none;">
-                <li style = "padding: 20px;"> 
-                    <p class = "foodInfo">
-                        ${{ item.price }}
-                    </p>
-                </li>
-            </u1>
-        {% endfor %}
-        </div>
-        
+    <div class = "foodContainer">
 
-        <div>
+        <div class = "pictureContainer">
             {% for item in foodList %}
+                {% if item.vip_exclusive == True and user.is_vip == True %}
                 <u1 style = "list-style: none;">
-                    <li style = "padding: 20px;"> 
-                        <p style = "display: inline; font-size: 1.5vw; font-family: Garamond, serif;">
-                            <a href = "{% url 'deleteFood' item.name %}" class = "button"> Delete </a>
-                        </p>
+                    <li style = "padding: 20px;" >
+                        <img src = "{{ item.img.url }}">
                     </li>
                 </u1>
+                {% endif %}
             {% endfor %}
         </div>
-        -->
-        
-    
+
+        <div class = "itemContainer">
+            {% for item in foodList %}
+                {% if item.vip_exclusive == True and user.is_vip == True %}
+                <u1 style = "list-style: none;">
+                    <li style = "padding: 20px;"> 
+                        <p class = "foodTitle">
+                            {{ item.name }} 
+                        </p>
+                        <p class = "foodInfo">
+                            ${{ item.price }}
+                        </p>
+                        <p style = "margin-left: 20px; display: inline;  font-size: 1.5vw; font-family: Garamond, serif;">
+                            <a href = "{% url 'deleteFood' item.name %}" class = "button"> Delete </a>
+                        </p>
+                        <p class = "foodDesc">
+                            {{ item.description }}
+                        </p>
+                        
+                    </li>
+                </u1>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
     
     <form method = "post" enctype="multipart/form-data">

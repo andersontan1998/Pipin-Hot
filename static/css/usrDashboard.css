@@ -1,22 +1,42 @@
-.profileContainer {
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    padding: 3vw;
-    flex-direction: row;
-}
 
-.profileText {
-    font-size: 1.25vw;
-    font-family: "Garamond", serif;
-    font-weight: bold;
-    text-align: left;
-}
-
-.header img {
+.header img{
     display: block;
     width: 50%;
     height: auto;
     margin-left: auto;
     margin-right: auto;
+}
+
+.profileContainer {
+    display: flex;
+    align-items: left; 
+    justify-content: center; 
+    padding: 3vw;
+    flex-direction: column;
+    width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profileTextTitle {
+    font-size: 1.5vw;
+    font-family: "Garamond", serif;
+    text-align: left;
+    width: 50vw;
+    height: 1vw;
+}
+
+.dashTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 35px;
+    flex-direction: column;
 }

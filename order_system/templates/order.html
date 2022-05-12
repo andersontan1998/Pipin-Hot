@@ -3,8 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Upload Images</title>
+    <title>Menu</title>
     <link rel = "stylesheet" href = "{% static '/css/chefMenu.css' %}">
+    <link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <style>
     h1 {
@@ -13,6 +14,14 @@
         font-family: "Garamond", serif;
         text-align: center;
     }
+
+    h2 {
+        margin-top: 2.5vw;
+        font-size: 1.5vw;
+        font-family: "Garamond", serif;
+        text-align: center;
+    }
+
 </style>
 <body>
     <div class = "header">
@@ -24,63 +33,90 @@
     <form method="POST"> 
         {% csrf_token %}
         <div class = "foodContainer">
-            <!-- <div class = "pictureContainer">
-                {% for item in foodList %}
+        
+            <div class = "pictureContainer">
+                {% for item in Appetizer.all %}
+                    {% if item.vip_exclusive == False %}
                     <u1 style = "list-style: none;">
                         <li style = "padding: 20px;" >
                             <img src = "{{ item.img.url }}">
                         </li>
                     </u1>
+                    {% endif %}
                 {% endfor %}
-            </div> -->
+            </div>
 
-                <div class = "pictureContainer">
-                    {% for item in Appetizer.all %}
-                        <u1 style = "list-style: none;">
-                            <li style = "padding: 20px;" >
-                                <img src = "{{ item.img.url }}">
-                            </li>
-                        </u1>
-                    {% endfor %}
-                </div>
-
-                <div>
-                {% for item in Appetizer.all %}
-                    <u1 style = "list-style: none;">
-                        <li style = "padding: 20px;"> 
-                            <p class = "foodTitle">
-                                {{ item.name }} 
-                            </p>
-                            <p class = "foodInfo">
-                                ${{ item.price }}
-                            </p>
-                            <p style = "display: inline; margin-left: 3vw;">
-                                <input type="checkbox" name="items[]" value="{{ item.pk }}">
-                            </p>
-                            
-                            <p class = "foodDesc">
-                                {{ item.description }}
-                            </p>
-                            
-                        </li>
-                    </u1>
-                {% endfor %}
-                </div>
-        <!--
-            <div style = "border-width: 5px; border-color: black;">
-            {% for item in foodList %}
+            <div>
+            {% for item in Appetizer.all %}
+                {% if item.vip_exclusive == False %}
                 <u1 style = "list-style: none;">
                     <li style = "padding: 20px;"> 
+                        <p class = "foodTitle">
+                            {{ item.name }} 
+                        </p>
                         <p class = "foodInfo">
                             ${{ item.price }}
                         </p>
+                        <p style = "display: inline; margin-left: 3vw;">
+                            <input type="checkbox" name="items[]" value="{{ item.pk }}">
+                        </p>
+                        
+                        <p class = "foodDesc">
+                            {{ item.description }}
+                        </p>
+                        
                     </li>
                 </u1>
+                {% endif %}
             {% endfor %}
             </div>
-        -->
-    </div>
-    <div >
+        
+        </div>
+        {% if user.is_vip == True %}
+            <h2> VIP Menu <i style = "font-size: 1.00vw; margin-left: 20px;" class = "glyphicon glyphicon-glass"></i> </h2>
+        {% endif %}
+        
+        <div class = "foodContainer">
+        
+            <div class = "pictureContainer">
+                {% for item in Appetizer.all %}
+                    {% if item.vip_exclusive == True and user.is_vip == True %}
+                    <u1 style = "list-style: none;">
+                        <li style = "padding: 20px;" >
+                            <img src = "{{ item.img.url }}">
+                        </li>
+                    </u1>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div>
+            {% for item in Appetizer.all %}
+                {% if item.vip_exclusive == True and user.is_vip == True %}
+                <u1 style = "list-style: none;">
+                    <li style = "padding: 20px;"> 
+                        <p class = "foodTitle">
+                            {{ item.name }} 
+                        </p>
+                        <p class = "foodInfo">
+                            ${{ item.price }}
+                        </p>
+                        <p style = "display: inline; margin-left: 3vw;">
+                            <input type="checkbox" name="items[]" value="{{ item.pk }}">
+                        </p>
+                        
+                        <p class = "foodDesc">
+                            {{ item.description }}
+                        </p>
+                        
+                    </li>
+                </u1>
+                {% endif %}
+            {% endfor %}
+            </div>
+        
+        </div>
+    <div>
         <label for="name">Full Name</label>
         <input type="hidden" value="{{User.username}}" name="name"/>
         <select name="logistic">

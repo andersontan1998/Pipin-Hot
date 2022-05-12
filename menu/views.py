@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import *
 from .models import FoodItem
+from reg_log.models import Customer
 import os
 
 # Create your views here.
@@ -24,6 +25,9 @@ def foodView(request):
     form = FoodForm(request.POST, request.FILES)
     foodList = FoodItem.objects.all()
 
+    user = request.user
+    cust = Customer.objects.get(pk=user)
+
     if form.is_valid():
         foodItem = form.save(commit=False)
         foodItem.chef_name = User.objects.get(pk=request.user.pk)
@@ -35,7 +39,7 @@ def foodView(request):
     else:
         form = FoodForm()
 
-    return render(request, 'chefMenu.html', {'form': form, 'foodList': foodList})
+    return render(request, 'chefMenu.html', {'form': form, 'foodList': foodList, 'user': cust})
 
 
 def deleteFood(request, name):
