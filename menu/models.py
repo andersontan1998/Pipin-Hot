@@ -12,6 +12,7 @@ class FoodItem(models.Model):
         max_length=300, default="No description given")
     quantity_ordered = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    vip_exclusive = models.BooleanField(default=False)
 
 
 class Image(models.Model):

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from order_system.models import OrderModel
 from menu.models import FoodItem
+from reg_log.models import Customer
 import json
 # Create your views here.
 
@@ -9,14 +10,16 @@ import json
 class Order(View):
     def get(self, request, *args, **kwargs):
         # get every item from each category
-
+        user = request.user
+        cust = Customer.objects.get(pk=user)
         appetizer = FoodItem.objects.filter(
             category__startswith='Dinner')
 
         # pass into context
 
         context = {
-            'Appetizer': appetizer
+            'Appetizer': appetizer,
+            'user': cust
         }
         # render template
         return render(request, 'order.html', context)
