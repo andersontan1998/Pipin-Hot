@@ -5,7 +5,7 @@ from forums.models import Forum_Posts
 from menu.models import FoodItem
 from order_system.models import OrderModel
 from django.views import View
-from forums.models import Review, Complaint
+from forums.models import Review
 from reg_log.models import User
 
 # Create your views here.

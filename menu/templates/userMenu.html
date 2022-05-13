@@ -1,9 +1,10 @@
 {% load static %}
+{% load mathfilters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Upload Images</title>
+    <title>Visitor Menu</title>
     <link rel = "stylesheet" href = "{% static '/css/chefMenu.css' %}">
 </head>
 <style>
@@ -24,45 +25,44 @@
     <div class = "foodContainer">
         <div class = "pictureContainer">
             {% for item in foodList %}
+                {% if item.vip_exclusive == False %}
                 <u1 style = "list-style: none;">
                     <li style = "padding: 20px;" >
                         <img src = "{{ item.img.url }}">
                     </li>
                 </u1>
+                {% endif %}
             {% endfor %}
         </div>
         <div>
         {% for item in foodList %}
+            {% if item.vip_exclusive == False %}
             <u1 style = "list-style: none;">
-                <li style = "padding: 20px;"> 
+                <li style = "padding: 20px; margin-top: 0.2vw; margin-bottom: 0.70vw"> 
                     <p class = "foodTitle">
                         {{ item.name }} 
                     </p>
                     <p class = "foodInfo">
                         ${{ item.price }}
                     </p>
+                    {% with num=item.rating denom=item.quantity_ordered %}
+                    <p style = "margin-left: 40px; margin-right: 1vw" class = "foodInfo">
+                        <img style = "width:0.8vw; height:0.75vw;" src = "{% static 'star.png' %}"/>
+                        {% if item.quantity_ordered != 0 %}
+                            <strong> {{ num|intdiv:denom }} </strong> ({{item.quantity_ordered}})
+                        {% endif %}
+                    </p>
+                    {% endwith %}
                     <p class = "foodDesc">
                         {{ item.description }}
                     </p>
                     
                 </li>
             </u1>
+            {% endif %}
         {% endfor %}
         </div>
-    <!--
-        <div style = "border-width: 5px; border-color: black;">
-        {% for item in foodList %}
-            <u1 style = "list-style: none;">
-                <li style = "padding: 20px;"> 
-                    <p class = "foodInfo">
-                        ${{ item.price }}
-                    </p>
-                </li>
-            </u1>
-        {% endfor %}
-        </div>
-    -->
-
+  
     </div>
 
 </body>
