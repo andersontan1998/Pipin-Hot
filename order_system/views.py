@@ -13,6 +13,8 @@ class Order(View):
         # get every item from each category
         user = request.user
         cust = Customer.objects.get(pk=user)
+        topFoods = FoodItem.objects.order_by('rating')[3:]
+
         appetizer = FoodItem.objects.filter(
             category__startswith='Dinner')
 
@@ -22,7 +24,8 @@ class Order(View):
 
         context = {
             'Appetizer': appetizer,
-            'User': user
+            'User': user,
+            'topfoodList': topFoods,
         }
         # render template
         return render(request, 'order.html', context)

@@ -1,11 +1,11 @@
 {% load static %}
+{% load mathfilters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Menu</title>
+    <title>Customer Menu</title>
     <link rel = "stylesheet" href = "{% static '/css/chefMenu.css' %}">
-    <link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <style>
     h1 {
@@ -32,6 +32,58 @@
 
     <form method="POST"> 
         {% csrf_token %}
+
+        <h2> Most Popular Dishes </h2>
+        <div class = "foodContainer">
+    
+            <div class = "pictureContainer">
+                {% for item in topfoodList.all %}
+                    {% if item.vip_exclusive == False %}
+                    <u1 style = "list-style: none;">
+                        <li style = "padding: 20px;" >
+                            <img src = "{{ item.img.url }}">
+                        </li>
+                    </u1>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div>
+            {% for item in topfoodList.all %}
+                {% if item.vip_exclusive == False %}
+                <u1 style = "list-style: none;">
+                    <li style = "padding: 20px; margin-bottom: 0.80vw"> 
+                        <p class = "foodTitle">
+                            {{ item.name }} 
+                        </p>
+                        <p class = "foodInfo">
+                            ${{ item.price }}
+                        </p>
+                        {% with num=item.rating denom=item.quantity_ordered %}
+                        <p style = "margin-left: 40px; margin-right: 1vw" class = "foodInfo">
+                            <img style = "width:0.8vw; height:0.75vw;" src = "{% static 'star.png' %}"/>
+                            {% if item.quantity_ordered != 0 %}
+                                {{ num|intdiv:denom }} ({{item.quantity_ordered}})
+                            {% endif %}
+                        </p>
+                        {% endwith %}
+                        <p style = "display: inline; margin-left: 2vw;">
+                            <input type="checkbox" name="items[]" value="{{ item.pk }}">
+                        </p>
+                        <p class = "foodDesc">
+                            {{ item.description }}
+                        </p>
+                        
+                    </li>
+                </u1>
+                {% endif %}
+            {% endfor %}
+            </div>
+        
+        </div>    
+
+        <h2> Full Menu </h2>
+
         <div class = "foodContainer">
         
             <div class = "pictureContainer">
@@ -50,17 +102,24 @@
             {% for item in Appetizer.all %}
                 {% if item.vip_exclusive == False %}
                 <u1 style = "list-style: none;">
-                    <li style = "padding: 20px;"> 
+                    <li style = "padding: 20px; margin-bottom: 0.80vw"> 
                         <p class = "foodTitle">
                             {{ item.name }} 
                         </p>
                         <p class = "foodInfo">
                             ${{ item.price }}
                         </p>
-                        <p style = "display: inline; margin-left: 3vw;">
+                        {% with num=item.rating denom=item.quantity_ordered %}
+                        <p style = "margin-left: 40px; margin-right: 1vw" class = "foodInfo">
+                            <img style = "width:0.8vw; height:0.75vw;" src = "{% static 'star.png' %}"/>
+                            {% if item.quantity_ordered != 0 %}
+                                {{ num|intdiv:denom }} ({{item.quantity_ordered}})
+                            {% endif %}
+                        </p>
+                        {% endwith %}
+                        <p style = "display: inline; margin-left: 2vw;">
                             <input type="checkbox" name="items[]" value="{{ item.pk }}">
                         </p>
-                        
                         <p class = "foodDesc">
                             {{ item.description }}
                         </p>
@@ -74,50 +133,57 @@
         </div>
         {% if user.is_vip == True %}
             <h2> VIP Menu <i style = "font-size: 1.00vw; margin-left: 20px;" class = "glyphicon glyphicon-glass"></i> </h2>
-        {% endif %}
         
-        <div class = "foodContainer">
-        
-            <div class = "pictureContainer">
+            <div class = "foodContainer">
+            
+                <div class = "pictureContainer">
+                    {% for item in Appetizer.all %}
+                        {% if item.vip_exclusive == True and user.is_vip == True %}
+                        <u1 style = "list-style: none;">
+                            <li style = "padding: 20px;" >
+                                <img src = "{{ item.img.url }}">
+                            </li>
+                        </u1>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div>
                 {% for item in Appetizer.all %}
                     {% if item.vip_exclusive == True and user.is_vip == True %}
                     <u1 style = "list-style: none;">
-                        <li style = "padding: 20px;" >
-                            <img src = "{{ item.img.url }}">
+                        <li style = "padding: 20px; margin-bottom: 0.8vw"> 
+                            <p class = "foodTitle">
+                                {{ item.name }} 
+                            </p>
+                            <p class = "foodInfo">
+                                ${{ item.price }}
+                            </p>
+                            {% with num=item.rating denom=item.quantity_ordered %}
+                            <p style = "margin-left: 40px; margin-right: 1vw" class = "foodInfo">
+                                <img style = "width:0.8vw; height:0.75vw;" src = "{% static 'star.png' %}"/>
+                                {% if item.quantity_ordered != 0 %}
+                                    {{ num|intdiv:denom }} ({{item.quantity_ordered}})
+                                {% endif %}
+                            </p>
+                            {% endwith %}
+                            <p style = "display: inline; margin-left: 2vw;">
+                                <input type="checkbox" name="items[]" value="{{ item.pk }}">
+                            </p>
+                            <p class = "foodDesc">
+                                {{ item.description }}
+                            </p>
+                            
                         </li>
                     </u1>
                     {% endif %}
                 {% endfor %}
+                </div>
+            
             </div>
-
-            <div>
-            {% for item in Appetizer.all %}
-                {% if item.vip_exclusive == True and user.is_vip == True %}
-                <u1 style = "list-style: none;">
-                    <li style = "padding: 20px;"> 
-                        <p class = "foodTitle">
-                            {{ item.name }} 
-                        </p>
-                        <p class = "foodInfo">
-                            ${{ item.price }}
-                        </p>
-                        <p style = "display: inline; margin-left: 3vw;">
-                            <input type="checkbox" name="items[]" value="{{ item.pk }}">
-                        </p>
-                        
-                        <p class = "foodDesc">
-                            {{ item.description }}
-                        </p>
-                        
-                    </li>
-                </u1>
-                {% endif %}
-            {% endfor %}
-            </div>
-        
-        </div>
-    <div>
-        <label for="name">Full Name</label>
+        {% endif %}
+    <div style = "margin-top: 5vw">
+        <label for="name">Select Order Type</label>
         <input type="hidden" value="{{User.username}}" name="name"/>
         <select name="logistic">
             <option value="delivery"> Delivery </option>
