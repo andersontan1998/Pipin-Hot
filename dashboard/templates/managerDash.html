@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager Dashboard</title>
+    <link rel = "stylesheet" href = "{% static '/css/usrDashboard.css' %}">
+    <link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<style>
+    h1 {
+        margin-top: 2.5vw;
+        font-size: 2.5vw;
+        font-family: "Garamond", serif;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    hr.solid {
+        border-top: 1px solid rgb(109, 100, 100);
+        width: 100%;
+        height: 1px;
+    }
+    
+    a {
+        margin-left: 30px;
+        font-size: 2vw;
+        text-align: center;
+    }
+
+</style>
+<body>
+    <div class = "header">
+        <img src="{% static 'Pipin-Hot.png' %}"/>
+    </div>
+
+    <div class = "dashTitle">
+        <h1> Manager Dashboard </h1>
+        <a href = "{% url 'edit_profile' %}" class = "glyphicon glyphicon-edit"></a>
+    </div>
+    
+
+    <div class = "profileContainer">
+        <p class = "profileTextTitle">
+            Name: &emsp;&emsp; 
+            <strong style = "font-size: 1.75vw;"> {{ user.first_name }} {{ user.last_name }} </strong>
+        </p>
+
+        <hr class = "solid">
+
+        <!-- <p class = "profileTextTitle">
+            Address: &emsp;&emsp; <strong style = "font-size: 1.75vw;"> {{ user.address }} </strong>
+        </p>
+
+        <hr class = "solid">
+
+        <p class = "profileTextTitle">
+            Account Funds: &emsp;&emsp; <strong style = "font-size: 1.75vw;"> ${{ user.account_funds }} </strong>
+            <a href = "{% url 'edit_funds' %}"  
+               style = "margin-left: 75px; margin-bottom: 10px; font-family: Garamond, serif; font-weight: bold; font-size: 1.5vw">Add Funds </a>
+        </p> -->
+
+        <hr class = "solid">
+
+        <p class = "profileTextTitle">
+            User Warnings: &emsp;&emsp; <strong style = "font-size: 1.75vw;"> {{ user.warnings }} </strong>
+        </p>
+
+        <hr class = "solid">
+
+        <p class = "profileTextTitle">
+            VIP Status: &emsp;&emsp; <strong style = "font-size: 1.75vw;"> {{ user.is_vip }} </strong>
+        </p>
+
+        <hr class = "solid">
+
+    </div>
+
+
+    {% for review in reviews %}
+
+    <div>
+        {{review.is_complaint}}
+    </div>
+    <div>
+        {{ review.subject}}
+    </div>
+    <div>
+        {{ review.description}}
+    </div>
+
+    {% endfor %}
+</body>
+</html> 

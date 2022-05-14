@@ -87,7 +87,7 @@
         <div class = "foodContainer">
         
             <div class = "pictureContainer">
-                {% for item in Appetizer.all %}
+                {% for item in food.all %}
                     {% if item.vip_exclusive == False %}
                     <u1 style = "list-style: none;">
                         <li style = "padding: 20px;" >
@@ -99,7 +99,7 @@
             </div>
 
             <div>
-            {% for item in Appetizer.all %}
+            {% for item in food.all %}
                 {% if item.vip_exclusive == False %}
                 <u1 style = "list-style: none;">
                     <li style = "padding: 20px; margin-bottom: 0.80vw"> 
@@ -137,7 +137,7 @@
             <div class = "foodContainer">
             
                 <div class = "pictureContainer">
-                    {% for item in Appetizer.all %}
+                    {% for item in food.all %}
                         {% if item.vip_exclusive == True and user.is_vip == True %}
                         <u1 style = "list-style: none;">
                             <li style = "padding: 20px;" >
@@ -149,7 +149,7 @@
                 </div>
 
                 <div>
-                {% for item in Appetizer.all %}
+                {% for item in food.all %}
                     {% if item.vip_exclusive == True and user.is_vip == True %}
                     <u1 style = "list-style: none;">
                         <li style = "padding: 20px; margin-bottom: 0.8vw"> 
