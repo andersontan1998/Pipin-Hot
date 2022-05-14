@@ -3,23 +3,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Customer Dashboard</title>
-    <link rel = "stylesheet" href = "{% static '/css/usrDashboard.css' %}">
+    <title>Pipin' Hot</title>
+    <link rel = "stylesheet" href = "{% static '/css/defaultHome.css' %}">
+    <link rel = "stylesheet" href = "{% static '/css/header.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Diplomata">
 </head>
 <style>
     h1 {
         margin-top: 2.5vw;
         font-size: 2vw;
-        font-family: "Garamond", serif;
+        font-family: "Garamond", sans-serif;
         text-align: center;
+    }
+    p {
+        font-size: 14px;
+        font-family: "Garamond", sans-serif; 
     }
 </style>
 <body>
-    <div class = "header">
-        <img src="{% static 'Pipin-Hot.png' %}"/>
+    <div id = "header">
+        PIPIN' HOT
     </div>
 
-    <h1> Home </h1>
+    <nav>
+        <ul class="navbar">
+            <li><a href="{% url 'ordersNav' %}">ORDER</a></li>
+            <li><a href="{% url 'menuNav' %}">MENU</a></li>
+            <li><a href="{% url 'forumNav' %}">FORUM</a></li>
+            <li><a href="{% url 'loginNav' %}">LOGIN</a></li>
+        </ul>
+    </nav>
+
+    <div class = "restaurantContainer">
+        <img src="{% static 'restaurant.jpg' %}"/>
+    </div>
+
+    <div class="grid">
+        <h1 class="head">Restaurant Hours</h1>
+        <p class="leftCell">Mon-Fri:</p>
+        <p class="rightCell">10AM-10PM</p>
+        <p class="leftCell">Sat:</p>
+        <p class="rightCell">10AM-10PM</p>
+        <p class="leftCell">Sun:</p>
+        <p class="rightCell">Closed</p>
+    </div>
 
 </body>
 </html>
