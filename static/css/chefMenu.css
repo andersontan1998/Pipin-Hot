@@ -4,12 +4,17 @@
     justify-content: center; 
     padding: 3vw;
     flex-direction: row;
+    outline-style: double;
 }
 
 .foodContainer img {
     width: 5.5vw;
-    height: auto;
+    height: 5.5vw;
     display: inline;
+}
+
+.pictureContainer {
+    display: block;
 }
 
 body {
@@ -53,7 +58,3 @@ body {
     height: auto;
 }
 
-.pictureContainer {
-    width: 7vw;
-    height: auto;
-}

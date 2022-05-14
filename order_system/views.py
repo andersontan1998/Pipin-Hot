@@ -2,28 +2,38 @@ from django.shortcuts import render, redirect
 from django.views import View
 from order_system.models import OrderModel
 from menu.models import FoodItem
+from reg_log.models import Customer
 import json
+from reg_log.models import User
 # Create your views here.
 
 
 class Order(View):
     def get(self, request, *args, **kwargs):
         # get every item from each category
+        user = request.user
+        cust = Customer.objects.get(pk=user)
+        topFoods = FoodItem.objects.order_by('rating')[3:]
 
         appetizer = FoodItem.objects.filter(
             category__startswith='Dinner')
 
+        user = User.objects.get(pk=request.user.pk)
+
         # pass into context
 
         context = {
-            'Appetizer': appetizer
+            'Appetizer': appetizer,
+            'User': user,
+            'topfoodList': topFoods,
         }
         # render template
         return render(request, 'order.html', context)
 
     def post(self, request, *args, **kwargs):
 
-        name = request.POST.get('name')
+        user = User.objects.get(pk=request.user.pk)
+        name = user.username
 
         order_items = {
             'items': []
@@ -47,7 +57,16 @@ class Order(View):
             price += item['price']
             items_id.append(item['id'])
 
-        order = OrderModel.objects.create(price=price, name=name)
+        logistic = request.POST.get("logistic")
+
+        if logistic == "delivery":
+            order = OrderModel.objects.create(
+                price=price, name=name, is_delivery=True)
+
+        else:
+            order = OrderModel.objects.create(
+                price=price, name=name, is_delivery=False)
+
         order.items.add(*items_id)
 
         return redirect("order_confirmation", pk=order.pk)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 # Create your models here.
 
 # class Task(models.Model):
@@ -11,6 +12,7 @@ from django.contrib.auth.models import AbstractUser
 #           ]
 #
 #
+
 
 class User(AbstractUser):
     is_customer = models.BooleanField(default=False)
@@ -29,13 +31,15 @@ class Customer(models.Model):
     account_funds = models.IntegerField(default=0)
     warnings = models.IntegerField(default=0)
     is_vip = models.BooleanField(default=False)
+    # top_three = models.OneToOneField(
+    #     TopThree, on_delete=models.CASCADE, blank=True)
 
 
 class Chef(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
-    salary = models.BigIntegerField()
+    salary = models.BigIntegerField(default=0)
     rating = models.IntegerField(default=0)
 
 

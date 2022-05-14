@@ -1,3 +1,4 @@
+db.sqlite3
 venv/
 **/__pycache__/
 delivery/__pycache__/__init__.cpython-310.pyc
@@ -176,4 +177,3 @@ pipin_hot/__pycache__/settings.cpython-310.pyc
 pipin_hot/__pycache__/urls.cpython-310.pyc
 reg_log/__pycache__/models.cpython-310.pyc
 reg_log/migrations/__pycache__/0004_customer_is_vip_customer_warnings.cpython-310.pyc
-db.sqlite3
