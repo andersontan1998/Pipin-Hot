@@ -24,7 +24,14 @@
         <ul>
             <li><a href="{% url 'ordersNav' %}">ORDER</a></li>
             <li><a href="{% url 'menuNav' %}">MENU</a></li>
+            <li><a href="{% url 'forumNav' %}">FORUM</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'dashNav' %}">DASHBOARD</a></li>
+            <li><a href="{% url 'logoutNav' %}">LOGOUT</a></li>
+            {% else %}
+            <li><a href="{% url 'regNav' %}">REGISTER</a></li>
             <li><a href="{% url 'loginNav' %}">LOGIN</a></li>
+            {% endif %}
         </ul>
     </nav>
 

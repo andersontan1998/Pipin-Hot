@@ -55,11 +55,15 @@
     background-color: grey;
 }
 
+.navbar li:nth-last-child(2) {
+    float: right;
+}
+
 .navbar li:last-child {
     float: right;
 }
 
-.active {
+.navbar li a:active {
     background-color: #43c1f3;
-  }
+}
 /* END NAVIGATION BAR */

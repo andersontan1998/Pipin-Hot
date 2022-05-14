@@ -1,4 +1,5 @@
 db.sqlite3
+dummyaccounts.txt
 venv/
 **/__pycache__/
 delivery/__pycache__/__init__.cpython-310.pyc
