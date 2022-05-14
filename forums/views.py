@@ -17,6 +17,7 @@ class all_orders(generic.ListView):
     def get(self, request, *args, **kwargs):
         # get every item from each category
 
+        template_name = 'forum.html'
         if request.user.is_authenticated:
             username = request.user.username
             orders = OrderModel.objects.filter(

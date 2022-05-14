@@ -10,11 +10,13 @@ from django.contrib import messages
 
 
 def index(request):
-    return render(request, '../templates/index.html')
+    return render(request, 'defaultHome.html')
 
 
 def register(request):
-    return render(request, '../templates/register.html')
+    if (request.user.is_authenticated):
+        return redirect('defaultHome.html')
+    return render(request, './templates/register.html')
 
 
 class customer_register(CreateView):
@@ -44,7 +46,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/reg_log/index')
+                return render(request,'defaultHome.html')
             else:
                 messages.error(request, "Incorrect username and/or password")
         else:
@@ -56,4 +58,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/reg_log/login')
+    return render(request,'defaultHome.html')
