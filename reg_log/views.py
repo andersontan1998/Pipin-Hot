@@ -16,7 +16,7 @@ def index(request):
 def register(request):
     if (request.user.is_authenticated):
         return redirect('defaultHome.html')
-    return render(request, './templates/register.html')
+    return render(request, 'register.html')
 
 
 class customer_register(CreateView):
@@ -28,7 +28,7 @@ class customer_register(CreateView):
 class chef_register(CreateView):
     model = User
     form_class = ChefSignUpForm
-    template_name = '../templates/chef_register.html'
+    template_name = 'chef_register.html'
 
 
 class deliverer_register(CreateView):
