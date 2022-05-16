@@ -73,7 +73,8 @@ def login_view(request):
 
     # context is
     if (request.user.is_authenticated):
-        return redirect('deliveryui')
+        if(Deliverer.objects.filter(pk=user).exists()):
+            return redirect('deliveryui')
 
     return render(request, '../templates/login.html', context={'form': AuthenticationForm()})
 
