@@ -23,6 +23,11 @@
 
     background-color: #ED411B;
 }
+
+#header a {
+    color: white;
+    text-decoration: none;
+    }
 /* END PIPIN HOT HEADER */
 
 /* NAVIGATION BAR */
