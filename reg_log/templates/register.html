@@ -27,7 +27,7 @@
 .sub-form-container {
     display: flex;
     position: absolute;
-    top: 300px;
+    top: 200px;
     margin-top: 10px;
 }
 </style>
@@ -38,7 +38,7 @@
     <div class="form-container">
         <form action="{% url 'register' %}" method="POST" novalidate>
             {% csrf_token %}
-            {{utform}}
+            {{utform.as_p}}
             <input type="submit" value="Sumbit">
         </form>
     </div>
@@ -52,10 +52,13 @@
     {% elif ut == "customer" %}
     {% include "customer_register.html" %}
 
-    {% elif utform.user_type.value == "manager" %}
-    {% elif utform.user_type.value == "sales" %}
+    {% elif ut == "manager" %}
+    {% include "manager_register.html" %}
+
+    {% elif ut == "sales" %}
+    {% include "sales_register.html" %}
 
     {% else %}
-    <div class="sub-form-container">Something is wrong...</div>
+    <div class="sub-form-container">Please select a user type to register</div>
     {% endif %}
 {% endblock %}

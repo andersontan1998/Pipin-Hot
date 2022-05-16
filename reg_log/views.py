@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from .models import User, Customer, Chef, Deliverer
-from .forms import CustSignUpForm, ChefSignUpForm, DelivererSignUpForm, SalesAssociateSignUpForm, UserTypeForm
+from .forms import CustSignUpForm, ChefSignUpForm, DelivererSignUpForm, ManagerSignUpForm, SalesAssociateSignUpForm, UserTypeForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -20,10 +20,11 @@ def register(request, context={}):
     utform = UserTypeForm(request.POST)
     delivform = DelivererSignUpForm()
     custform = CustSignUpForm()
-    chefform = ChefSignUpForm
+    chefform = ChefSignUpForm()
+    salesform = SalesAssociateSignUpForm()
+    managerform = ManagerSignUpForm()
     context = {'ut' : ''}
     if(utform.is_valid()):
-        delivform = DelivererSignUpForm()
         context = {'ut' : utform.cleaned_data['user_type']}
     else:
         utform = UserTypeForm()
@@ -34,6 +35,8 @@ def register(request, context={}):
     context['delivform'] = delivform
     context['custform'] = custform
     context['chefform'] = chefform
+    context['salesform'] = salesform
+    context['managerform'] = managerform
 
     return render(request, 'register.html', context)
 
@@ -54,6 +57,17 @@ class deliverer_register(CreateView):
     model = User
     form_class = DelivererSignUpForm
     template_name = '../templates/deliverer_register.html'
+
+
+class sales_register(CreateView):
+    model = User
+    form_class = SalesAssociateSignUpForm
+    template_name = 'sales_register.html'
+
+class manager_register(CreateView):
+    model = User
+    form_class = ManagerSignUpForm
+    template_name = 'manager_register.html'
 
 
 def login_view(request):
