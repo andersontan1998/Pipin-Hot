@@ -45,6 +45,8 @@ class customer_register(CreateView):
     model = User
     form_class = CustSignUpForm
     template_name = '../templates/customer_register.html'
+    def get_success_url(self) -> str:
+        return super().get_success_url()
 
 
 class chef_register(CreateView):
