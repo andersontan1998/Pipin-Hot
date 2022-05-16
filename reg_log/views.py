@@ -72,6 +72,9 @@ def login_view(request):
             messages.error(request, "Form not valid")
 
     # context is
+    if (request.user.is_authenticated):
+        return redirect('deliveryui')
+
     return render(request, '../templates/login.html', context={'form': AuthenticationForm()})
 
 
