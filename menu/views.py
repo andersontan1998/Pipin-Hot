@@ -11,42 +11,49 @@ import os
 def custFoodView(request):
     form = FoodForm(request.POST, request.FILES)
     foodList = FoodItem.objects.all()
-
-    user = request.user
-    if (Customer.objects.filter(pk=user).exists()):
-        #return render(request, 'userMenu.html', {'form': form, 'foodList': foodList})
-        return redirect('order')
-    
-    else:
-        if form.is_valid():
-            form.save()
-
+    if request.user.is_authenticated:
+        user = request.user
+        if (Customer.objects.filter(pk=user).exists()):
+            #return render(request, 'userMenu.html', {'form': form, 'foodList': foodList})
+            return redirect('order')
+        
+        if (Chef.objects.filter(pk=user).exists()):
+            return redirect('chef_menu')
+        
         else:
-            form = FoodForm()
+            if form.is_valid():
+                form.save()
 
+            else:
+                form = FoodForm()
+            return render(request, 'userMenu.html', {'form': form, 'foodList': foodList})
+        
+    else:
         return render(request, 'userMenu.html', {'form': form, 'foodList': foodList})
-        #return redirect('order')
 
 
 def foodView(request):
-    form = FoodForm(request.POST, request.FILES)
-    foodList = FoodItem.objects.all()
-    topFoods = FoodItem.objects.order_by('rating')[3:]
-    user = request.user
+    if request.user.is_authenticated:
+        form = FoodForm(request.POST, request.FILES)
+        foodList = FoodItem.objects.all()
+        topFoods = FoodItem.objects.order_by('rating')[3:]
+        user = request.user
 
-    if (Chef.objects.filter(pk=user).exists()):
-        #print("MASTER CHEF DETECTED")
-        if form.is_valid():
-            foodItem = form.save(commit=False)
-            foodItem.chef_name = User.objects.get(pk=request.user.pk)
-            foodItem.save()
+        if (Chef.objects.filter(pk=user).exists()):
+            #print("MASTER CHEF DETECTED")
+            if form.is_valid():
+                foodItem = form.save(commit=False)
+                foodItem.chef_name = User.objects.get(pk=request.user.pk)
+                foodItem.save()
+            else:
+                form = FoodForm()
+
+            return render(request, 'chefMenu.html', {'form': form, 'foodList': foodList, 'topfoodList': topFoods})
         else:
-            form = FoodForm()
-
-        return render(request, 'chefMenu.html', {'form': form, 'foodList': foodList, 'topfoodList': topFoods})
+            #print("Not a Chef!")
+            return redirect('defaultHome')
     else:
-        #print("Not a Chef!")
-        return redirect('default')
+        return redirect('defaultHome')
         
 def deleteFood(request, name):
     print(name)

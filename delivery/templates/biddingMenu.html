@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'deliveryBase.html' %}
 
 
 {% block content %}
@@ -13,6 +13,16 @@
         <h2 class="text-center" pt-2 style="color: rgb(16, 13, 13);">Bidding Menu</h2>
     </div>
     
+    <div class="row justify-content-center mt-4">
+        <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="row justify-content-center mt-4"> 
+                <button type="submit">Bid Now</button>
+            </div>
+        </form>
+    </div>
+
     <div class="container">
 
         <div class="row justify-content-center">
