@@ -60,7 +60,7 @@ class ChefSignUpForm(UserCreationForm):
         chef = Chef.objects.create(user=user)
         chef.first_name = self.cleaned_data.get('first_name')
         chef.salary = self.cleaned_data.get('salary')
-        chef.rating = self.cleaned_data('salary')
+        chef.rating = self.cleaned_data('rating')
         chef.save()
 
         return user

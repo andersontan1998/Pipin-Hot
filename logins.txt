@@ -1,3 +1,6 @@
 TYPE:USERNAME:PASSWORD
 
 superuser:vivi:vivivivi
+sales:salesa:abcdabcd
+manager:managera:
+superuser:viviperls:abcdabcd
