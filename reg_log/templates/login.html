@@ -27,23 +27,7 @@
             <form action="{% url 'login' %}" method = "POST" nonvalidate>
                 {% csrf_token %}
                 {{form}}
-                <input type="submit">
+                <input type="submit" value="Submit">
             </form>
     </div>       
 {% endblock %}
-
-<!-- <!DOCTYPE html>
-<head>
-
-</head>
-
-<body>
-
-<form action="{% url 'login' %}" method = "POST" nonvalidate>
-    {% csrf_token %}
-    {{form}}
-    <input type="submit"> -->
-<!-- </form>  -->
-
-
-<!-- </body> -->

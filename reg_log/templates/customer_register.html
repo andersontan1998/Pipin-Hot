@@ -1,23 +1,8 @@
-{% extends 'defaultHome.html' %}
 
-{% block css %}
-<style>
-    .form-container {
-        display: flex;
-        position: absolute;
-        top: 100.5px;
-        margin-top: 10px;
-    }
-</style>
-<!-- TODO: style text? -->
-{% endblock %}
-
-{% block content %}
-    <div class="form-container">
+    <div class="sub-form-container">
         <form action="{% url 'customer_register' %}" method="POST" novalidate>
             {% csrf_token %}
-            {{form}}
+            {{custform}}
         <input type="submit">
     
     </div>
-{% endblock %}

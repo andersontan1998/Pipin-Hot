@@ -18,20 +18,44 @@
     background-color: darkgrey;
     justify-content: center;
 }
+.form-container {
+    display: flex;
+    position: absolute;
+    top: 100.5px;
+    margin-top: 10px;
+}
+.sub-form-container {
+    display: flex;
+    position: absolute;
+    top: 300px;
+    margin-top: 10px;
+}
 </style>
 {% endblock %}
 
 
 {% block content %}
-    <div class="grid-container">
-        <div class="grid-item">
-            <a href= "{% url 'customer_register' %}"> Je suis customer</a>
-        </div>
-        <div class="grid-item">
-            <a href= "{% url 'chef_register' %}"> Je suis Chef</a>
-        </div>
-        <div class="grid-item">
-            <a href="{% url 'deliverer_register' %}"> Je suis Deliverer</a>
-        </div>
-    </div>       
+    <div class="form-container">
+        <form action="{% url 'register' %}" method="POST" novalidate>
+            {% csrf_token %}
+            {{utform}}
+            <input type="submit" value="Sumbit">
+        </form>
+    </div>
+
+    {% if ut == "delivery" %}
+    {% include "deliverer_register.html" %}
+
+    {% elif ut == "chef" %}
+    {% include "chef_register.html" %}
+
+    {% elif ut == "customer" %}
+    {% include "customer_register.html" %}
+
+    {% elif utform.user_type.value == "manager" %}
+    {% elif utform.user_type.value == "sales" %}
+
+    {% else %}
+    <div class="sub-form-container">Something is wrong...</div>
+    {% endif %}
 {% endblock %}

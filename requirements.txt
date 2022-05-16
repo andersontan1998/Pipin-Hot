@@ -1,5 +1,6 @@
 asgiref==3.5.1
 Django==4.0.4
+django-crispy-forms==1.14.0
 django-mathfilters==1.0.0
 numpy==1.22.3
 pandas==1.4.2

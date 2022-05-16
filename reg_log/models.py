@@ -13,13 +13,22 @@ from django.contrib.auth.models import AbstractUser
 #
 #
 
-
 class User(AbstractUser):
+    user_choices = [
+    ('customer', 'Customer'),
+    ('chef', 'Chef'),
+    ('delivery', 'Delivery'),
+    ('manager', 'Manager'),
+    ('sales', 'Sales Associate')
+    ]
+
     is_customer = models.BooleanField(default=False)
     is_chef = models.BooleanField(default=False)
     is_deliverer = models.BooleanField(default=False)
     is_manager = models.BooleanField(default=False)
+    is_sales = models.BooleanField(default=False)
     username = models.CharField(max_length=50, unique=True)
+    user_type = models.CharField(max_length=30, choices=user_choices, blank=True)
 
 
 class Customer(models.Model):
@@ -51,6 +60,14 @@ class Deliverer(models.Model):
 
 
 class Manager(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    salary = models.BigIntegerField()
+
+
+class SalesAssociate(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)

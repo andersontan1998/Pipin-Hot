@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from .models import User, Customer, Chef, Deliverer
-from .forms import CustSignUpForm, ChefSignUpForm, DelivererSignUpForm
+from .forms import CustSignUpForm, ChefSignUpForm, DelivererSignUpForm, SalesAssociateSignUpForm, UserTypeForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -9,14 +9,33 @@ from django.contrib import messages
 # Create your views here.
 
 
-def index(request):
+def index(request, context={}):
     return render(request, 'defaultHome.html')
 
 
-def register(request):
+def register(request, context={}):
     if (request.user.is_authenticated):
         return redirect('defaultHome.html')
-    return render(request, 'register.html')
+
+    utform = UserTypeForm(request.POST)
+    delivform = DelivererSignUpForm()
+    custform = CustSignUpForm()
+    chefform = ChefSignUpForm
+    context = {'ut' : ''}
+    if(utform.is_valid()):
+        delivform = DelivererSignUpForm()
+        context = {'ut' : utform.cleaned_data['user_type']}
+    else:
+        utform = UserTypeForm()
+        # chefform = ChefSignUpForm()
+        # salesform = SalesAssociateSignUpForm()
+
+    context['utform'] = utform
+    context['delivform'] = delivform
+    context['custform'] = custform
+    context['chefform'] = chefform
+
+    return render(request, 'register.html', context)
 
 
 class customer_register(CreateView):
