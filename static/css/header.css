@@ -1,0 +1,74 @@
+/* PIPIN HOT HEADER */
+#header {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    top: 45px;
+    left: 0px;
+
+    font-family: 'Diplomata';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 5vw;
+    line-height: 5vw;
+    letter-spacing: 2px;
+
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    justify-content: center;
+
+    flex-direction: row;
+    order: 0;
+
+    background-color: #ED411B;
+}
+
+#header a {
+    color: white;
+    text-decoration: none;
+    }
+/* END PIPIN HOT HEADER */
+
+/* NAVIGATION BAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+.navbar li {
+    float: left;
+}
+  
+.navbar li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: "Garamond", sans-serif;
+}
+
+.navbar li a:hover {
+    background-color: grey;
+}
+
+.navbar li:nth-last-child(2) {
+    float: right;
+}
+
+.navbar li:last-child {
+    float: right;
+}
+
+.navbar li a:active {
+    background-color: #43c1f3;
+}
+/* END NAVIGATION BAR */

@@ -7,6 +7,8 @@
     <link rel = "stylesheet" href = "{% static '/css/defaultHome.css' %}">
     <link rel = "stylesheet" href = "{% static '/css/header.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Diplomata">
+    {% block css %}
+    {% endblock %}
 </head>
 <style>
     h1 {
@@ -21,19 +23,28 @@
     }
 </style>
 <body>
-    <div id = "header">
-        PIPIN' HOT
-    </div>
-
-    <nav>
+    <nav style="height: 45px;">
         <ul class="navbar">
-            <li><a href="{% url 'ordersNav' %}">ORDER</a></li>
             <li><a href="{% url 'menuNav' %}">MENU</a></li>
-            <li><a href="{% url 'forumNav' %}">FORUM</a></li>
+            {% if not user.is_authenticated %}
+            <li><a href="{% url 'regNav' %}">REGISTER</a></li>
             <li><a href="{% url 'loginNav' %}">LOGIN</a></li>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'forumNav' %}">FORUM</a></li>
+            <li><a href="{% url 'ordersNav' %}">ORDER</a></li>
+            <li><a href="{% url 'dashNav' %}">DASHBOARD</a></li>
+            <li><a href="{% url 'logoutNav' %}">LOGOUT</a></li>
+            {% endif %}
         </ul>
     </nav>
+    <div id = "header">
+        <a href="{% url 'defaultHome' %}">PIPIN' HOT</a>
+    </div>
 
+
+    {% block content %}
     <div class = "restaurantContainer">
         <img src="{% static 'restaurant.jpg' %}"/>
     </div>
@@ -47,6 +58,6 @@
         <p class="leftCell">Sun:</p>
         <p class="rightCell">Closed</p>
     </div>
-
+    {% endblock %}
 </body>
 </html>

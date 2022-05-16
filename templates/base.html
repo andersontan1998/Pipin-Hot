@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pipin' Hot</title>
+    <link rel = "stylesheet" href = "{% static '/css/header.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Diplomata">
+</head>
+<style>
+    h1 {
+        margin-top: 2.5vw;
+        font-size: 2vw;
+        font-family: "Garamond", sans-serif;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class = "header">
+        PIPIN' HOT
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'ordersNav' %}">ORDER</a></li>
+            <li><a href="{% url 'menuNav' %}">MENU</a></li>
+            <li><a href="{% url 'forumNav' %}">FORUM</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'dashNav' %}">DASHBOARD</a></li>
+            <li><a href="{% url 'logoutNav' %}">LOGOUT</a></li>
+            {% else %}
+            <li><a href="{% url 'regNav' %}">REGISTER</a></li>
+            <li><a href="{% url 'loginNav' %}">LOGIN</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %} 
+</body>
+</html>

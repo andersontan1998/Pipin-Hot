@@ -1,15 +1,33 @@
-<!DOCTYPE html>
-<head>
+{% extends 'defaultHome.html' %}
 
-</head>
+{% block css %}
+<style>
+.grid-container {
+    position: absolute;
+    display: grid;
+    margin: 12.5vw;
+    width: 75vw;
+    justify-content: space-evenly;
 
-<body>
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: minmax(100px, auto);
+    column-gap: 1vw;
+}
+.grid-item {
+    display: flex;
+    background-color: darkgrey;
+    justify-content: center;
+}
+</style>
+{% endblock %}
 
-<form action="{% url 'login' %}" method = "POST" nonvalidate>
-    {% csrf_token %}
-    {{form}}
-    <input type="submit">
-</form> 
 
-
-</body>
+{% block content %}
+    <div class="grid-container">
+            <form action="{% url 'login' %}" method = "POST" nonvalidate>
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" value="Submit">
+            </form>
+    </div>       
+{% endblock %}

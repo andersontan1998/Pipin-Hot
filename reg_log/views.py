@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from .models import User, Customer, Chef, Deliverer
-from .forms import CustSignUpForm, ChefSignUpForm, DelivererSignUpForm
+from .forms import CustSignUpForm, ChefSignUpForm, DelivererSignUpForm, SalesAssociateSignUpForm, UserTypeForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -9,12 +9,33 @@ from django.contrib import messages
 # Create your views here.
 
 
-def index(request):
-    return render(request, '../templates/index.html')
+def index(request, context={}):
+    return render(request, 'defaultHome.html')
 
 
-def register(request):
-    return render(request, '../templates/register.html')
+def register(request, context={}):
+    if (request.user.is_authenticated):
+        return redirect('defaultHome.html')
+
+    utform = UserTypeForm(request.POST)
+    delivform = DelivererSignUpForm()
+    custform = CustSignUpForm()
+    chefform = ChefSignUpForm
+    context = {'ut' : ''}
+    if(utform.is_valid()):
+        delivform = DelivererSignUpForm()
+        context = {'ut' : utform.cleaned_data['user_type']}
+    else:
+        utform = UserTypeForm()
+        # chefform = ChefSignUpForm()
+        # salesform = SalesAssociateSignUpForm()
+
+    context['utform'] = utform
+    context['delivform'] = delivform
+    context['custform'] = custform
+    context['chefform'] = chefform
+
+    return render(request, 'register.html', context)
 
 
 class customer_register(CreateView):
@@ -26,7 +47,7 @@ class customer_register(CreateView):
 class chef_register(CreateView):
     model = User
     form_class = ChefSignUpForm
-    template_name = '../templates/chef_register.html'
+    template_name = 'chef_register.html'
 
 
 class deliverer_register(CreateView):
@@ -44,16 +65,20 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/reg_log/index')
+                return render(request,'defaultHome.html')
             else:
                 messages.error(request, "Incorrect username and/or password")
         else:
             messages.error(request, "Form not valid")
 
     # context is
+    if (request.user.is_authenticated):
+        if(Deliverer.objects.filter(pk=user).exists()):
+            return redirect('deliveryui')
+
     return render(request, '../templates/login.html', context={'form': AuthenticationForm()})
 
 
 def logout_view(request):
     logout(request)
-    return redirect('/reg_log/login')
+    return render(request,'defaultHome.html')

@@ -1,21 +1,61 @@
-<!DOCTYPE html>
+{% extends 'defaultHome.html' %}
 
-<head>
+{% block css %}
+<style>
+.grid-container {
+    position: absolute;
+    display: grid;
+    margin: 12.5vw;
+    width: 75vw;
+    justify-content: space-evenly;
 
-</head>
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: minmax(100px, auto);
+    column-gap: 1vw;
+}
+.grid-item {
+    display: flex;
+    background-color: darkgrey;
+    justify-content: center;
+}
+.form-container {
+    display: flex;
+    position: absolute;
+    top: 100.5px;
+    margin-top: 10px;
+}
+.sub-form-container {
+    display: flex;
+    position: absolute;
+    top: 300px;
+    margin-top: 10px;
+}
+</style>
+{% endblock %}
 
 
-<body>
+{% block content %}
+    <div class="form-container">
+        <form action="{% url 'register' %}" method="POST" novalidate>
+            {% csrf_token %}
+            {{utform}}
+            <input type="submit" value="Sumbit">
+        </form>
+    </div>
 
-    <h1>
-        <div>
-            <a href= "{% url 'customer_register' %}"> Je suis customer</a>
-        </div>
-        <div>
-            <a href= "{% url 'chef_register' %}"> Je suis Chef</a>
-        </div>
-        <div>
-            <a href="{% url 'deliverer_register' %}"> Je suis Deliverer</a>
-        </div>
-    </h1>
-</body>
+    {% if ut == "delivery" %}
+    {% include "deliverer_register.html" %}
+
+    {% elif ut == "chef" %}
+    {% include "chef_register.html" %}
+
+    {% elif ut == "customer" %}
+    {% include "customer_register.html" %}
+
+    {% elif utform.user_type.value == "manager" %}
+    {% elif utform.user_type.value == "sales" %}
+
+    {% else %}
+    <div class="sub-form-container">Something is wrong...</div>
+    {% endif %}
+{% endblock %}

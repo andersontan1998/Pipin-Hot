@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<head>
-
-</head>
-
-
-<body>
-
-    <h1>
-      
-    </h1>
-    <div>
+    <div class="sub-form-container">
         <form action="{% url 'deliverer_register' %}" method="POST" novalidate>
             {% csrf_token %}
-            {{form}}
+            {{delivform}}
             <input type="submit">
     </div>
-</body>

@@ -1,0 +1,3 @@
+TYPE:USERNAME:PASSWORD
+
+Customer:custa:abcdabcd
