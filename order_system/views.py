@@ -15,15 +15,22 @@ class Order(View):
         cust = Customer.objects.get(pk=user)
         topFoods = FoodItem.objects.order_by('rating')[3:]
 
-        appetizer = FoodItem.objects.filter(
-            category__startswith='Dinner')
+<<<<<<< .merge_file_a14504
+        food = FoodItem.objects.all()
+=======
+        Items = FoodItem.objects.all()
+>>>>>>> .merge_file_a23152
 
         user = User.objects.get(pk=request.user.pk)
 
         # pass into context
 
         context = {
-            'Appetizer': appetizer,
+<<<<<<< .merge_file_a14504
+            'food': food,
+=======
+            'Appetizer': Items,
+>>>>>>> .merge_file_a23152
             'User': user,
             'topfoodList': topFoods,
         }
