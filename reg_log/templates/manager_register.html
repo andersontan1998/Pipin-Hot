@@ -1,6 +1,6 @@
 <div class="sub-form-container">
     <form action="{% url 'manager_register' %}" method="POST" novalidate>
         {% csrf_token %}
-        {{managerform.as_p}}
+        {{form.as_p}}
         <input type="submit" value="Submit">
 </div>

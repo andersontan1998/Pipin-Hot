@@ -17,14 +17,38 @@ def register(request, context={}):
     if (request.user.is_authenticated):
         return redirect('defaultHome.html')
 
-    utform = UserTypeForm(request.POST)
-    delivform = DelivererSignUpForm()
-    custform = CustSignUpForm()
-    chefform = ChefSignUpForm
-    context = {'ut': ''}
-    if(utform.is_valid()):
+    if(request.method == 'POST'):
+        utform = UserTypeForm(request.POST)
         delivform = DelivererSignUpForm()
-        context = {'ut': utform.cleaned_data['user_type']}
+        custform = CustSignUpForm()
+        chefform = ChefSignUpForm()
+        salesform = SalesAssociateSignUpForm()
+        managerform = ManagerSignUpForm()
+        context = {'ut' : ''}
+        if(utform.is_valid()):
+            ut = utform.cleaned_data['user_type']
+            context['ut'] = ut
+
+            if(ut == 'delivery'):
+                form = DelivererSignUpForm(request.POST)
+                print('hello')
+            elif(ut == 'customer'):
+                form = CustSignUpForm(request.POST)
+            elif(ut == 'chef'):
+                form = ChefSignUpForm(request.POST)
+            elif(ut == 'manager'):
+                form = ManagerSignUpForm(request.POST)
+            else:
+                form = SalesAssociateSignUpForm(request.POST)
+
+            if (form.is_valid()):
+                form.instance.is_active = False
+                form.save()
+                return redirect('login')
+            else:
+                context['form'] = form
+            
+
     else:
         utform = UserTypeForm()
         # chefform = ChefSignUpForm()
@@ -44,6 +68,9 @@ class customer_register(CreateView):
     model = User
     form_class = CustSignUpForm
     template_name = '../templates/customer_register.html'
+    def get_success_url(self) -> str:
+        return super().get_success_url()
+
 
     def get_success_url(self) -> str:
         return super().get_success_url()
@@ -53,12 +80,17 @@ class chef_register(CreateView):
     model = User
     form_class = ChefSignUpForm
     template_name = 'chef_register.html'
+    def get_success_url(self) -> str:
+        return super().get_success_url()
+
 
 
 class deliverer_register(CreateView):
     model = User
     form_class = DelivererSignUpForm
     template_name = '../templates/deliverer_register.html'
+    def get_success_url(self) -> str:
+        return super().get_success_url()
 
 
 class sales_register(CreateView):

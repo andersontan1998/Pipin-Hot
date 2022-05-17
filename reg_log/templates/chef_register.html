@@ -1,6 +1,6 @@
     <div class="sub-form-container">
-        <form action="{% url 'chef_register' %}" method="POST" novalidate>
+        <form action="{% url 'defaultHome' %}" method="POST" novalidate>
             {% csrf_token %}
-            {{chefform.as_p}}
+            {{form.as_p}}
             <input type="submit" value="Submit">
     </div>

@@ -2,63 +2,184 @@
 
 {% block css %}
 <style>
-.grid-container {
-    position: absolute;
-    display: grid;
-    margin: 12.5vw;
-    width: 75vw;
-    justify-content: space-evenly;
+    .grid-container {
+        position: absolute;
+        display: grid;
+        margin: 12.5vw;
+        width: 75vw;
+        justify-content: space-evenly;
 
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-auto-rows: minmax(100px, auto);
-    column-gap: 1vw;
-}
-.grid-item {
-    display: flex;
-    background-color: darkgrey;
-    justify-content: center;
-}
-.form-container {
-    display: flex;
-    position: absolute;
-    top: 100.5px;
-    margin-top: 10px;
-}
-.sub-form-container {
-    display: flex;
-    position: absolute;
-    top: 200px;
-    margin-top: 10px;
-}
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-rows: minmax(100px, auto);
+        column-gap: 1vw;
+    }
+
+    .grid-item {
+        display: flex;
+        background-color: darkgrey;
+        justify-content: center;
+    }
+
+    .form-container {
+        display: flex;
+        position: absolute;
+        top: 100.5px;
+        margin-top: 10px;
+    }
+
+    .sub-form-container {
+        display: flex;
+        position: absolute;
+        top: 200px;
+        margin-top: 10px;
+    }
 </style>
 {% endblock %}
 
 
 {% block content %}
-    <div class="form-container">
-        <form action="{% url 'register' %}" method="POST" novalidate>
-            {% csrf_token %}
-            {{utform.as_p}}
-            <input type="submit" value="Sumbit">
-        </form>
-    </div>
+<div class="form-container">
+    <form method="POST" action="/reg_log/register">
+        <select id="user_type_select" name="user_type">
+            <option value="customer" selected>Customer</option>
+            <option value="chef">Chef</option>
+            <option value="manager">Manager</option>
+            <option value="sales">Sales Associate</option>
+            <option value="delivery">Delivery</option>
+        </select>
+        <input type="hidden" name="csrfmiddlewaretoken"
+            value="JlTCp1bmAkAxdvBkf6XaPNUXzgDxqKjAzQkutRhopyIXkYNwOEzYptS7TsCiJMCX">
+        <ul class="errorlist">
+            <li>This field is required.</li>
+        </ul>
+        <p>
+            <label for="id_username">Username:</label>
+            <input type="text" name="username" maxlength="50" autocapitalize="none" autocomplete="username" autofocus
+                required id="id_username">
+        </p>
+        <ul class="errorlist">
+            <li>This field is required.</li>
+        </ul>
+        <p>
+            <label for="id_password1">Password:</label>
+            <input type="password" name="password1" autocomplete="new-password" required id="id_password1">
+            <span class="helptext">
+                <ul>
+                    <li>Your password can’t be too similar to your other personal information.</li>
+                    <li>Your password must contain at least 8 characters.</li>
+                    <li>Your password can’t be a commonly used password.</li>
+                    <li>Your password can’t be entirely numeric.</li>
+                </ul>
+            </span>
+        </p>
+        <ul class="errorlist">
+            <li>This field is required.</li>
+        </ul>
+        <p>
+            <label for="id_password2">Password confirmation:</label>
+            <input type="password" name="password2" autocomplete="new-password" required id="id_password2">
+            <span class="helptext">Enter the same password as before, for verification.</span>
+        </p>
+        <ul class="errorlist">
+            <li>This field is required.</li>
+        </ul>
+        <p>
+            <label for="id_first_name">First name:</label>
+            <input type="text" name="first_name" maxlength="30" required id="id_first_name">
+        </p>
 
-    {% if ut == "delivery" %}
-    {% include "deliverer_register.html" %}
 
-    {% elif ut == "chef" %}
-    {% include "chef_register.html" %}
+        <div id="sub-form-container">
 
-    {% elif ut == "customer" %}
-    {% include "customer_register.html" %}
+        </div>
 
-    {% elif ut == "manager" %}
-    {% include "manager_register.html" %}
+        <input type="submit" value="Register">
+    </form>
+</div>
 
-    {% elif ut == "sales" %}
-    {% include "sales_register.html" %}
+<script type="text/javascript">
+    const custHtml = `
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <p>
+        <label for="id_last_name">Last name:</label>
+        <input type="text" name="last_name" maxlength="30" required id="id_last_name">
+    </p>
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <p>
+        <label for="id_address">Address:</label>
+        <input type="text" name="address" maxlength="60" required id="id_address">
+    </p>`;
 
-    {% else %}
-    <div class="sub-form-container">Please select a user type to register</div>
-    {% endif %}
+
+    const chefHtml = `
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <p>
+        <label for="id_salary">Salary:</label>
+        <input type="number" name="salary" min="-9223372036854775808" max="9223372036854775807" required id="id_salary">
+    </p>
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <p>
+        <label for="id_rating">Rating:</label>
+        <input type="number" name="rating" required id="id_rating">
+    </p>`;
+
+    const deliveryHtml = `
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <p>
+        <label for="id_salary">Salary:</label>
+        <input type="number" name="salary" min="-9223372036854775808" max="9223372036854775807" required id="id_salary">  
+    </p>`;
+
+    const managerHtml = `
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <p>
+        <label for="id_last_name">Last name:</label>
+        <input type="text" name="last_name" maxlength="30" required id="id_last_name">
+    </p>
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <p>
+        <label for="id_salary">Salary:</label>
+        <input type="number" name="salary" min="-9223372036854775808" max="9223372036854775807" required id="id_salary"> 
+    </p>`;
+
+    const salesHtml = `
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <p>
+        <label for="id_last_name">Last name:</label>
+        <input type="text" name="last_name" maxlength="30" required id="id_last_name">
+    </p>
+    <ul class="errorlist"><li>This field is required.</li></ul>
+    <p>
+        <label for="id_salary">Salary:</label>
+        <input type="number" name="salary" min="-9223372036854775808" max="9223372036854775807" required id="id_salary">
+    </p>`;
+
+    function changeFormType(user_type) {
+        let innerFormContainer = document.getElementById("sub-form-container")
+
+        switch (user_type) {
+            case "customer": 
+                innerFormContainer.innerHTML = custHtml;
+                break;
+            case "chef": 
+                innerFormContainer.innerHTML = chefHtml;
+                break;
+            case "delivery":
+                innerFormContainer.innerHTML = deliveryHtml;
+                break;
+            case "sales":
+                innerFormContainer.innerHTML = salesHtml;
+                break;
+            case "manager":
+                innerFormContainer.innerHTML = managerHtml;
+                break;
+        }
+    }
+
+    document.getElementById("user_type_select").addEventListener("change", function () {
+        changeFormType(this.value);
+    })
+
+    changeFormType("customer");
+</script>
 {% endblock %}
