@@ -75,11 +75,22 @@ class OrderConfirmation(View):
     def get(self, request, pk, *args, **kwargs):
         order = OrderModel.objects.get(pk=pk)
 
+        cust = Customer.objects.get(user=request.user)
         context = {
             'items': order.items,
             'price': order.price,
-            'pk': order.pk
+            'pk': order.pk,
+            'cust_funds': cust.account_funds
         }
+
+        if (cust.account_funds < order.price):
+            order.delete()
+            cust.warnings = cust.warnings - 1
+
+        else:
+            cust.account_funds = cust.account_funds - order.price
+
+        cust.save()
 
         return render(request, 'order_confirmation.html', context)
 

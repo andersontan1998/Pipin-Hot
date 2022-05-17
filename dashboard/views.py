@@ -9,7 +9,7 @@ from forums.models import Review, EmployeeReview
 def custDashboardView(request):
     user = request.user
     # print(user.username)
-    cust = Customer.objects.get(pk=user)
+    cust = Customer.objects.get(pk=user.pk)
     # print(cust.warnings)
     return render(request, 'custDash.html', {'user': cust})
 
@@ -75,7 +75,7 @@ def acceptReview(request, pk):
         else:
             chef.rating = chef.rating + 1
         chef.save()
-    else:
+    elif employee.is_delivery:
         deli = Deliverer.objects.get(pk=review.employee_name.pk)
         if(review.is_complaint):
             deli.rating = deli.rating - 1
@@ -83,6 +83,17 @@ def acceptReview(request, pk):
             deli.rating = deli.rating + 1
         deli.save()
 
+    else:
+        cust = Customer.objects.get(pk=review.review_order.complainee)
+        if (review.is_complaint):
+
+            cust.warnings = cust.warnings - 1
+
+        else:
+            cust.warnings = cust.warning + 1
+        cust.save()
+
+    review.delete()
     # verify that they don't surpass the warnings metric
     return redirect('manager_dashboard')
 
@@ -91,9 +102,12 @@ def rejectReview(request, pk):
 
     review = EmployeeReview.objects.get(pk=int(pk))
     reviewer = User.objects.get(username=review.review_order.complainee)
-    reviewer.rating = reviewer.rating - 1
-    review.save()
+    if reviewer.is_customer:
+        reviewer = Customer.objects.get(pk=review.review_order.complainee.pk)
+        reviewer.warnings = reviewer.warnings - 1
+        reviewer.save()
 
+    review.delete()
     # verify that they don't surpass the warnings metric
 
     return redirect('manager_dashboard')

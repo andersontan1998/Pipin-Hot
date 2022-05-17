@@ -20,8 +20,15 @@
         </div>
 
         <div >
-            <h1>Order Submitted!</h1>
-            <p>You should receive a confirmation email soon.</p>
+            {% if cust_funds < price %} 
+           <h1> Order Unsuccesfull</h1>
+
+           {%else%}
+           <h1>Order Submitted!</h1>
+           <p>You should receive a confirmation email soon.</p>
+           {%endif%}
+            
+           
             <a href="{% url 'index' %}">Go to the homepage</a>
         </div>
 
@@ -30,7 +37,10 @@
             {% for item in items.all %}
             <p>{{ item.name }} <span class="pl-3">{{ item.price }}</span></p>
             {% endfor %}
-
+           <p> Total price: {{price}}</p>
+           {% if cust_funds < price %} 
+           <p> You have insufficient funds for this order. You are given a warning</p>
+           {%endif%}
         </div>
 </body>
 </html>
