@@ -39,7 +39,8 @@
 
 {% block content %}
 <div class="form-container">
-    <form method="POST" action="/reg_log/register">
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
         <select id="user_type_select" name="user_type">
             <option value="customer" selected>Customer</option>
             <option value="chef">Chef</option>

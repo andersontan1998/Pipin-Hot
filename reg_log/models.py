@@ -64,7 +64,7 @@ class Manager(models.Model):
         User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    salary = models.BigIntegerField()
+    salary = models.BigIntegerField(default=0)
 
 
 class SalesAssociate(models.Model):
@@ -72,4 +72,4 @@ class SalesAssociate(models.Model):
         User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    salary = models.BigIntegerField()
+    salary = models.BigIntegerField(default=0)

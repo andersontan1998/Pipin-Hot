@@ -5,6 +5,7 @@ from .forms import CustSignUpForm, ChefSignUpForm, DelivererSignUpForm, ManagerS
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -13,6 +14,7 @@ def index(request, context={}):
     return render(request, 'defaultHome.html')
 
 
+@csrf_exempt
 def register(request, context={}):
     if (request.user.is_authenticated):
         return redirect('defaultHome.html')
@@ -118,7 +120,7 @@ def login_view(request):
 
     # context is
     if (request.user.is_authenticated):
-        if(Deliverer.objects.filter(pk=user).exists()):
+        if(Deliverer.objects.filter(pk=request.user).exists()):
             return redirect('deliveryui')
 
     return render(request, '../templates/login.html', context={'form': AuthenticationForm()})
