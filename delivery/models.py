@@ -7,6 +7,7 @@ from menu.models import FoodItem
 
 
 class Bid(models.Model):
+    Name = models.CharField(max_length=30, blank=True)
     Order =  models.IntegerField(default=0, primary_key=True)
-    Bid_Amount = models.IntegerField(default=100)
-    lowest_bid = models.IntegerField(blank=True)
+    Bid_Amount = models.IntegerField(default = 100)
+    lowest_bid = models.IntegerField(null = True, blank=True)

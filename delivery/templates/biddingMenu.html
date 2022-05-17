@@ -31,16 +31,17 @@
                     <thead>
                         <tr>
                             <th scope="col">Order ID</th>
-                            <th scope="col">Place Bids</th>
-                            <th scope="col">Customer Rating</th>
+                            <th scope="col">Lowest Bid</th>
+                            <th scope="col">Delivery Guy</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {% for order in orders %}
+                        {% for bids in allbids %}
                         <tr>
-                            <th scope="row">{{ order.pk }}</th>
-
+                            <th scope="row">{{ bids.Order }}</th>
+                            <th scope="row">{{ bids.Bid_Amount }}</th>
+                            <th scope="row">{{ bids.Name }}</th>
                         </tr>
                         {% endfor %}
                     </tbody>
