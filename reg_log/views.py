@@ -17,26 +17,50 @@ def register(request, context={}):
     if (request.user.is_authenticated):
         return redirect('defaultHome.html')
 
-    utform = UserTypeForm(request.POST)
-    delivform = DelivererSignUpForm()
-    custform = CustSignUpForm()
-    chefform = ChefSignUpForm()
-    salesform = SalesAssociateSignUpForm()
-    managerform = ManagerSignUpForm()
-    context = {'ut' : ''}
-    if(utform.is_valid()):
-        context = {'ut' : utform.cleaned_data['user_type']}
+    if(request.method == 'POST'):
+        utform = UserTypeForm(request.POST)
+        delivform = DelivererSignUpForm()
+        custform = CustSignUpForm()
+        chefform = ChefSignUpForm()
+        salesform = SalesAssociateSignUpForm()
+        managerform = ManagerSignUpForm()
+        context = {'ut' : ''}
+        if(utform.is_valid()):
+            ut = utform.cleaned_data['user_type']
+            context['ut'] = ut
+            
+            if(ut == 'delivery'):
+                form = DelivererSignUpForm(request.POST)
+                print('hello')
+            elif(ut == 'customer'):
+                form = CustSignUpForm(request.POST)
+            elif(ut == 'chef'):
+                form = ChefSignUpForm(request.POST)
+            elif(ut == 'manager'):
+                form = ManagerSignUpForm(request.POST)
+            else:
+                form = SalesAssociateSignUpForm(request.POST)
+
+            if (form.is_valid()):
+                print(form.cleaned_data)
+                form.instance.is_active = False
+                form.save()
+                return redirect('defaultHome')
+            else:
+                context['form'] = form
+            
+
     else:
         utform = UserTypeForm()
         # chefform = ChefSignUpForm()
         # salesform = SalesAssociateSignUpForm()
 
     context['utform'] = utform
-    context['delivform'] = delivform
-    context['custform'] = custform
-    context['chefform'] = chefform
-    context['salesform'] = salesform
-    context['managerform'] = managerform
+    # context['form'] = DelivererSignUpForm()
+    # context['custform'] = custform
+    # context['chefform'] = chefform
+    # context['salesform'] = salesform
+    # context['managerform'] = managerform
 
     return render(request, 'register.html', context)
 
@@ -45,18 +69,26 @@ class customer_register(CreateView):
     model = User
     form_class = CustSignUpForm
     template_name = '../templates/customer_register.html'
+    def get_success_url(self) -> str:
+        return super().get_success_url()
+
 
 
 class chef_register(CreateView):
     model = User
     form_class = ChefSignUpForm
     template_name = 'chef_register.html'
+    def get_success_url(self) -> str:
+        return super().get_success_url()
+
 
 
 class deliverer_register(CreateView):
     model = User
     form_class = DelivererSignUpForm
     template_name = '../templates/deliverer_register.html'
+    def get_success_url(self) -> str:
+        return super().get_success_url()
 
 
 class sales_register(CreateView):

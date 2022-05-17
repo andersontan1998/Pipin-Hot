@@ -2,7 +2,7 @@
     <div class="sub-form-container">
         <form action="{% url 'customer_register' %}" method="POST" novalidate>
             {% csrf_token %}
-            {{custform.as_p}}
+            {{form.as_p}}
         <input type="submit" value="Submit">
     
     </div>
