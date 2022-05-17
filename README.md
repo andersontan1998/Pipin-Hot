@@ -28,3 +28,30 @@ System features:
 - [x] 7. The chef whose dishes received consistently low ratings (<2) or 3 complaints, will be demoted (less salary), a chef demoted twice is fired. Conversely, a chef whose dishes receive high ratings (>4) or 3 compliments, will receive a bonus. One compliment can be used to cancel one complaint. The delivery people are handled the same way. 
 - [x] 8. The delivery people will compete to deliver the order by bidding, the manager assigns the order from bidding results: the one with lowest delivery price is generally chosen; if the one with higher asking price is chosen, the manager should write a memo in the system as justifications. The delivery person who didn’t deliver any in the past 5 orders will automatically receive one warning. 
 - [x] 9. Each team comes up with a creativity feature of the system to make it more exciting , e.g., smart - phone based system, voice - based features, or efficient route planning for delivery , which is worth 10% of overall score of the final project.
+- [ ] ______________________________________________________________________________________________________________________________________________________________
+Specification 1: Finished
+The ‘menu’ app contains the solution for specification 1. So a customer would have the regular menu and top 3 listing menu depending on their purchase history. We look at the rating each customer gave to an item to decide which items to put on the top 3 listing menu.
+
+Specification 2: Finished
+The ‘order_system’ app contains the solution for specification 2. That is, a customer can order from the menu and decide if they want delivery or pickup. There is a ‘is_delivery’ on the order model so that the backend can check if the customer is allowed to review the chef’s of the item.
+
+Specification 3: Partially Done
+The ‘forum’ app allows a customer to pick which order to review. Once an order is selected, the customer can review each item and its chef. The customer must decide if it is a complaint or compliment. The ‘dashboard’ allows a manager to review the reviews from customers. They can ultimately decide to reject or accept the review. The respective review is then processed and a warning is given to the chef/deliverer. If the review is rejected, then the customer receives a warning.
+
+Specification 4: Partially done
+The ‘dashboard’ app allows the user to see the number of warnings. It is a net warning: compliments - complains. So a negative number means that they have warnings.
+
+
+Specification 5: Finished
+The ‘dashboard’ app allows a customer to add funds to their account and see their balance. The ‘order_system’ app checks the the total price and if it’s more than the customer funds it deletes the order and gives the customer a warning.
+
+Specification 6: Unable to do
+
+
+Specification 7: Unable to do
+
+Specification 8: Partially done
+
+Specification 9: Partially done
+
+We made a home page that makes it easy to navigate the website and the register page features a single page application!
