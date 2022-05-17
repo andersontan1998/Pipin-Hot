@@ -9,13 +9,13 @@
     
     {% for order in Orders %}
 
-    {{order.name}}
-    {{order.items.name}}
+    <p>Customer name: {{order.name}}</p>
+
 
     {% for item in order.items.all %}
 
-    {{item.name}}
-    {{item.img}}
+    {{item.name}},
+   
     {% endfor %} 
     <form method="POST"> 
         {% csrf_token %}
