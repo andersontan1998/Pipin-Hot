@@ -2,6 +2,22 @@
 
 The objective of this application is to create an easy-to-use online restaurant service that will provide support for all the major needs of a restaurant, giving restaurants the tools they need to customize and set up their establishment on our system, create menus, prices, handle customer support and staffing, while also providing an interface for customers to quickly, easily, and conveniently order takeout from all of their favorite participating restaurants.
 
+Some packages you may need: (all located in requirements.txt)\
+You can use pip install -r requirements.txt
+
+asgiref==3.5.1\
+Django==4.0.4\
+django-crispy-forms==1.14.0\
+django-mathfilters==1.0.0\ 
+numpy==1.22.3\ 
+pandas==1.4.2\
+Pillow==9.1.0\
+python-dateutil==2.8.2\
+pytz==2022.1\
+six==1.16.0\
+sqlparse==0.4.2\
+tk==0.1.0
+
 System features: 
 - [x] 1. Provide a GUI , not necessarily web - based , with pictures to show the descriptions of each dish and price; each registered customer/VIP has a password to login, when they log in, based on the history of their prior choic e s , different registered customer/VIP will have different top 3 listing dishes. For new customers or visitors, the top 3 most popular dishes and top 3 highest rated dishes are listed on the first page. 
 - [x] 2. A customer can choose to 1) pick up the dishes in person, or 2) by restaurant delivery. For case 1) s/he can only complain/compliment the chef. 
