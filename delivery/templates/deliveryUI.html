@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'deliveryBase.html' %}
 
 
 {% block content %}
@@ -21,7 +21,7 @@
 
             <div class="card col-md-5 mr-3">
                 <h4 class="text-center pt-2">Number of Orders</h4>
-                <h1 class="text-center" style="color: #ad9c00;">{{ total_orders }}</h1>
+                <h1 class="text-center" style="color: #242121;">{{ total_orders }}</h1>
             </div>
         </div>
 
@@ -40,7 +40,6 @@
                             <th scope="col">Email</th>
                             <th scope="col">Address</th>
                             <th scope="col">Paid Status</th>
-                            <th scope="col">Lowest Bid</th>
                         </tr>
                     </thead>
 
@@ -56,7 +55,7 @@
                                 {% if order.is_paid %}
                                 <i style="color: green;" class="fas fa-check"></i>
                                 {% else %}
-                                <i style="color: red;" class="fas fa-times"></i>
+                                <i style="color: rgb(250, 166, 10);" class="fas fa-times"></i>
                                 {% endif %}
 
                             </td>

@@ -1,6 +1,6 @@
     <div class="sub-form-container">
         <form action="{% url 'deliverer_register' %}" method="POST" novalidate>
             {% csrf_token %}
-            {{delivform}}
-            <input type="submit">
+            {{delivform.as_p}}
+            <input type="submit" value="Submit">
     </div>
