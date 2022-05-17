@@ -34,8 +34,8 @@ def register(request, context={}):
     context['delivform'] = delivform
     context['custform'] = custform
     context['chefform'] = chefform
-    context['salesform'] = salesform
-    context['managerform'] = managerform
+    # context['salesform'] = salesform
+    # context['managerform'] = managerform
 
     return render(request, 'register.html', context)
 
