@@ -28,7 +28,7 @@ def register(request, context={}):
         if(utform.is_valid()):
             ut = utform.cleaned_data['user_type']
             context['ut'] = ut
-            
+
             if(ut == 'delivery'):
                 form = DelivererSignUpForm(request.POST)
                 print('hello')
@@ -42,10 +42,9 @@ def register(request, context={}):
                 form = SalesAssociateSignUpForm(request.POST)
 
             if (form.is_valid()):
-                print(form.cleaned_data)
                 form.instance.is_active = False
                 form.save()
-                return redirect('defaultHome')
+                return redirect('login')
             else:
                 context['form'] = form
             
