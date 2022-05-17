@@ -5,10 +5,11 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('chefMenu/', foodView, name = 'chef_menu'),
-    path('deleteFood/<name>', deleteFood, name = 'deleteFood'),
-    path('userMenu/', custFoodView, name = 'customer_menu'),
+    path('chefMenu/', foodView, name='chefMenu'),
+    path('deleteFood/<name>', deleteFood, name='deleteFood'),
+    path('userMenu/', custFoodView, name='customer_menu'),
 ]
 
 if settings.DEBUG:
-        urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

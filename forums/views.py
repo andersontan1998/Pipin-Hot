@@ -5,7 +5,7 @@ from forums.models import Forum_Posts
 from menu.models import FoodItem
 from order_system.models import OrderModel
 from django.views import View
-from forums.models import Review
+from forums.models import Review, EmployeeReview
 from reg_log.models import User
 
 # Create your views here.
@@ -34,9 +34,10 @@ class all_orders(generic.ListView):
 
     def post(self, request, *args, **kwarg):
 
+        user = User.objects.get(pk=request.user.pk)
         order_pk = request.POST.get('order')
-        order = OrderModel.objects.get(pk=order_pk)
-        review = Review.objects.create(order=order)
+        review = Review.objects.create(
+            complainee=user, reviewed_by_manager=False, order_assigned=OrderModel.objects.get(pk=order_pk))
 
         return redirect("review", pk=review.pk)
 
@@ -46,7 +47,7 @@ class review(View):
     def get(self, request, pk, *args, **kwargs):
 
         review = Review.objects.get(pk=pk)
-        order = OrderModel.objects.get(pk=review.order.pk)
+        order = OrderModel.objects.get(pk=review.order_assigned.pk)
         is_delivery = order.is_delivery
 
         context = {
@@ -60,29 +61,54 @@ class review(View):
 
     def post(self, request, pk, *args, **kwargs):
 
-        items = request.POST.getlist('items[]')
-        description = request.POST.get("description")
-        type_logistic = request.POST.get("review delivery")
         user = User.objects.get(pk=request.user.pk)
-        is_delivery = False
-        if type_logistic == "delivery":
-            is_delivery = True
-
         review = Review.objects.get(pk=pk)
-        review.description = description
-        review.user = user
-        review.is_complaint = True
-        review.rating = request.POST.get("rating_number")
-        review.complainee = user.pk
-        review.save()
+        items = request.POST.getlist('items[]')
+
+        if (review.order_assigned.is_delivery):
+
+            description = request.POST.get("description")
+            is_complaint = False
+            selection = request.POST.get('review delivery')
+            if "complain" == selection:
+                is_complaint = True
+
+            else:
+                is_complaint = False
+
+            delivery_review = EmployeeReview.objects.create(review_order=review,
+                                                            is_complaint=is_complaint, employee_name=None, description=description)
+            for item in items:
+                menu_item = FoodItem.objects.get(pk=int(item))
+                rating = request.POST.get(menu_item.name)
+                menu_item.rating = menu_item.rating + int(rating)
+                menu_item.quantity_ordered = menu_item.quantity_ordered + 1
+                menu_item.save()
+
+        else:
+            for item in items:
+                menu_item = FoodItem.objects.get(pk=int(item))
+
+                selection = request.POST.get(
+                    menu_item.chef_name.username+','+menu_item.name)
+                description = request.POST.get(
+                    "description," + str(menu_item.pk))
+
+                # {{item.chef_name.username}},{{item.name}}
+                if "complain" == selection:
+                    is_complaint = True
+                else:
+                    is_complaint = False
+
+                EmployeeReview.objects.create(review_order=review,
+                                              is_complaint=is_complaint, employee_name=menu_item.chef_name, description=description)
+
+                rating = request.POST.get(menu_item.name)
+                menu_item.rating = menu_item.rating + int(rating)
+                menu_item.quantity_ordered = menu_item.quantity_ordered + 1
+                menu_item.save()
         # review_employee = Complaint.objects.create(
         #     complainee=request.user, description=description, is_delivery=is_delivery)
-        for item in items:
-            menu_item = FoodItem.objects.get(pk=int(item))
-            rating = request.POST.get(menu_item.name)
-            menu_item.rating = menu_item.rating + int(rating)
-            menu_item.quantity_ordered = menu_item.quantity_ordered + 1
-            menu_item.save()
 
         return redirect("all_orders")
 

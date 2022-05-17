@@ -21,10 +21,10 @@ def register(request, context={}):
     delivform = DelivererSignUpForm()
     custform = CustSignUpForm()
     chefform = ChefSignUpForm
-    context = {'ut' : ''}
+    context = {'ut': ''}
     if(utform.is_valid()):
         delivform = DelivererSignUpForm()
-        context = {'ut' : utform.cleaned_data['user_type']}
+        context = {'ut': utform.cleaned_data['user_type']}
     else:
         utform = UserTypeForm()
         # chefform = ChefSignUpForm()
@@ -65,7 +65,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return render(request,'defaultHome.html')
+                return render(request, 'defaultHome.html')
             else:
                 messages.error(request, "Incorrect username and/or password")
         else:
@@ -73,6 +73,7 @@ def login_view(request):
 
     # context is
     if (request.user.is_authenticated):
+        user = request.user.pk
         if(Deliverer.objects.filter(pk=user).exists()):
             return redirect('deliveryui')
 
@@ -81,4 +82,4 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return render(request,'defaultHome.html')
+    return render(request, 'defaultHome.html')

@@ -30,9 +30,7 @@
 
 </style>
 <body>
-    <div class = "header">
-        <img src="{% static 'Pipin-Hot.png' %}"/>
-    </div>
+    <a href = "{% url 'defaultHome' %}"> <img src="{% static 'Pipin-Hot.png' %}"/> </a>
 
     <div class = "dashTitle">
         <h1> Manager Dashboard </h1>
@@ -60,35 +58,34 @@
                style = "margin-left: 75px; margin-bottom: 10px; font-family: Garamond, serif; font-weight: bold; font-size: 1.5vw">Add Funds </a>
         </p> -->
 
-        <hr class = "solid">
 
-        <p class = "profileTextTitle">
-            User Warnings: &emsp;&emsp; <strong style = "font-size: 1.75vw;"> {{ user.warnings }} </strong>
-        </p>
-
-        <hr class = "solid">
-
-        <p class = "profileTextTitle">
-            VIP Status: &emsp;&emsp; <strong style = "font-size: 1.75vw;"> {{ user.is_vip }} </strong>
-        </p>
-
-        <hr class = "solid">
 
     </div>
 
 
-    {% for review in reviews %}
+    {% for review in reviews.all %}
 
     <div>
-        {{review.is_complaint}}
-    </div>
-    <div>
-        {{ review.subject}}
+        <h2>{{review.review_order.complainee.username}} has a review of {{review.employee_name.username}}: </h2>
+        {% if review.is_complaint %}
+        <p1>This is a complaint</p1>
+        {% else %}
+        <p1>This is a compliment</p1>
+        {%endif%}
+    
+        
     </div>
     <div>
         {{ review.description}}
+      
     </div>
-
+    <p style = "margin-left: 1vw; display: inline;  font-size: 1.0vw; font-family: Garamond, serif;">
+        <a href = "{% url 'reject_review' review.pk %}" class = "button"> Reject Review </a>
+    </p>
+    <p style = "margin-left: 1vw; display: inline;  font-size: 1.0vw; font-family: Garamond, serif;">
+        <a href = "{% url 'accept_review' review.pk %}" class = "button"> Accept Review </a>
+    </p>
+   
     {% endfor %}
 </body>
 </html> 

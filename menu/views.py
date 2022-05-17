@@ -12,11 +12,11 @@ def custFoodView(request):
     form = FoodForm(request.POST, request.FILES)
     foodList = FoodItem.objects.all()
 
-    user = request.user
+    user = request.user.pk
     if (Customer.objects.filter(pk=user).exists()):
-        #return render(request, 'userMenu.html', {'form': form, 'foodList': foodList})
+        # return render(request, 'userMenu.html', {'form': form, 'foodList': foodList})
         return redirect('order')
-    
+
     else:
         if form.is_valid():
             form.save()
@@ -25,7 +25,7 @@ def custFoodView(request):
             form = FoodForm()
 
         return render(request, 'userMenu.html', {'form': form, 'foodList': foodList})
-        #return redirect('order')
+        # return redirect('order')
 
 
 def foodView(request):
@@ -47,7 +47,8 @@ def foodView(request):
     else:
         #print("Not a Chef!")
         return redirect('default')
-        
+
+
 def deleteFood(request, name):
     print(name)
     item = FoodItem.objects.get(name=name)

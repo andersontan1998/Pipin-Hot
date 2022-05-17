@@ -1,3 +1,4 @@
+from xmlrpc.client import Boolean
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -15,11 +16,11 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     user_choices = [
-    ('customer', 'Customer'),
-    ('chef', 'Chef'),
-    ('delivery', 'Delivery'),
-    ('manager', 'Manager'),
-    ('sales', 'Sales Associate')
+        ('customer', 'Customer'),
+        ('chef', 'Chef'),
+        ('delivery', 'Delivery'),
+        ('manager', 'Manager'),
+        ('sales', 'Sales Associate')
     ]
 
     is_customer = models.BooleanField(default=False)
@@ -28,7 +29,8 @@ class User(AbstractUser):
     is_manager = models.BooleanField(default=False)
     is_sales = models.BooleanField(default=False)
     username = models.CharField(max_length=50, unique=True)
-    user_type = models.CharField(max_length=30, choices=user_choices, blank=True)
+    user_type = models.CharField(
+        max_length=30, choices=user_choices, blank=True)
 
 
 class Customer(models.Model):
@@ -49,6 +51,7 @@ class Chef(models.Model):
         User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
     salary = models.BigIntegerField(default=0)
+    # this is number of compliments minus number of complaints. In other words, the net rating.
     rating = models.IntegerField(default=0)
 
 
@@ -57,6 +60,8 @@ class Deliverer(models.Model):
         User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
     salary = models.BigIntegerField(default=0)
+    # this is number of compliments minus number of complaints. In other words, the net rating.
+    rating = models.IntegerField(default=0, blank=True)
 
 
 class Manager(models.Model):
@@ -64,7 +69,7 @@ class Manager(models.Model):
         User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    salary = models.BigIntegerField()
+    salary = models.BigIntegerField(default=0)
 
 
 class SalesAssociate(models.Model):

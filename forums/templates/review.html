@@ -1,46 +1,99 @@
-{%load static %}
-
+{% load static %}
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <title>Review Order</title>
+    <link rel = "stylesheet" href = "{% static '/css/usrDashboard.css' %}">
+    <link rel = "stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+<style>
+    h1 {
+        margin-top: 2.5vw;
+        font-size: 2.5vw;
+        font-family: "Garamond", serif;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    hr.solid {
+        border-top: 1px solid rgb(109, 100, 100);
+        width: 100%;
+        height: 1px;
+    }
+    
+    a {
+        margin-left: 30px;
+        font-size: 2vw;
+        text-align: center;
+    }
+
+</style>
 <body>
-    <p1>
-        hi bum
-    </p1>
+    <a href = "{% url 'defaultHome' %}"> <img src="{% static 'Pipin-Hot.png' %}"/> </a>
+
     
     {{review.order.name.all}}
     <br>
     <form method="POST">
         {% csrf_token %}
-        {% for item in review.order.items.all %}
+        
+        {% if is_delivery %}
+        {% for item in review.order_assigned.items.all %}
 
-        {{item.name}}
         <div>
-            <label for="{{item.name}}">Review this Item</label>
-            <input type="hidden" name="items[]" value="{{ item.pk }}">
-            <input type="number" min= "0" max="10" name="{{ item.name}}" placeholder="Rate!">  
+           
+            <u1 style = "list-style: none;">
+                {{item.name}}
+                <li style = "padding: 20px; margin-top: 0.2vw; margin-bottom: 0.70vw"> 
+                    <img style = "width:0.8vw; height:0.75vw;" src = "{{ item.img.url }}"/>
+
+                    <label for="{{item.name}}">Review this Item</label>
+                    <input type="hidden" name="items[]" value="{{ item.pk }}">
+                    <input type="number" min= "0" max="10" name="{{ item.name}}" placeholder="Rate!">  
+                </li>
+              
+            </u1>
+
+        </div>
+    
     
         {% endfor %} 
-        {% if is_delivery %}
             <select id="delivery_rating" name="review delivery">
 
                 <option value = "complain">Complain</option>
                 <option value = "compliment">Compliment</option>
-                <option value = "">Omit</option>
             </select>      
-            <input type="number" placeholder="Rate delivery" name="rating_number"/>
+            <input type="text" placeholder="Rate delivery" name="description"/>
         </div>
             {% else %}
-            <select id="chef_rating" name="review chef">
+            {% for item in review.order_assigned.items.all %}
 
-                <option value = "complain">Complain</option>
-                <option value = "compliment">Compliment</option>
-                <option value = "">Omit</option>
-            </select>      
-            <input type="hidden" name="subject" value="{{item.chef_name}}"/>
-            <input type="number" placeholder="Rate delivery" name="rating_number"/>
+    
+                    
+                    <li style = "padding: 20px; margin-top: 0.2vw; margin-bottom: 0.70vw"> 
+                        {{item.name}}
+                        <img style = "width:0.8vw; height:0.75vw;" src = "{{ item.img.url }}"/>
+                        <br>
+    
+                    <label for="{{item.name}}">Review this Item</label>
+                    <input type="hidden" name="items[]" value="{{ item.pk }}">
+                    <input type="number" min= "0" max="10" name="{{ item.name}}" placeholder="Rate!">
+                    <select id="chef_rating" name="{{item.chef_name.username}},{{item.name}}">
+
+                        <option value = "complain">Complain</option>
+                        <option value = "compliment">Compliment</option>
+                    </select>      
+                    <input type="text" placeholder="Rate Chef" name="description,{{item.pk}}"/>
+                    </li>
+
+
+                <div>
+                    
+                </div>
+        
+            {% endfor %} 
+                    
         </div>
 
             {% endif %}

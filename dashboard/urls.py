@@ -8,7 +8,9 @@ urlpatterns = [
     path('customer/', custDashboardView, name='cust_dashboard'),
     path('editProfile/', editProfileView, name='edit_profile'),
     path('editFunds/', addFundsView, name='edit_funds'),
-    path('managerDashBoard/', managerDashboardView, name='managerDashBoard')
+    path('managerDashBoard/', managerDashboardView, name='manager_dashboard'),
+    path('rejectreview/<int:pk>', rejectReview, name="reject_review"),
+    path('acceptreview/<int:pk>', acceptReview, name="accept_review")
 ]
 
 if settings.DEBUG:

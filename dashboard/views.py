@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from dashboard.forms import *
-from reg_log.models import Customer, Manager
-from forums.models import Review
+from reg_log.models import Customer, Manager, User, Chef, Deliverer
+from forums.models import Review, EmployeeReview
 # Create your views here.
 
 
@@ -54,7 +54,7 @@ def addFundsView(request):
 
 def managerDashboardView(request):
     manager = Manager.objects.get(pk=request.user.pk)
-    reviews = Review.objects.all()
+    reviews = EmployeeReview.objects.all()
     # print(user.username)
     if manager is not None:
         return render(request, 'managerDash.html', {'user': manager, 'reviews': reviews})
@@ -62,3 +62,38 @@ def managerDashboardView(request):
     else:
         redirect('/reg_log/templates/index.html')
     # print(cust.warnings)
+
+
+def acceptReview(request, pk):
+
+    review = EmployeeReview.objects.get(pk=int(pk))
+    employee = User.objects.get(username=review.employee_name.username)
+    if employee.is_chef:
+        chef = Chef.objects.get(pk=review.employee_name.pk)
+        if(review.is_complaint):
+            chef.rating = chef.rating - 1
+        else:
+            chef.rating = chef.rating + 1
+        chef.save()
+    else:
+        deli = Deliverer.objects.get(pk=review.employee_name.pk)
+        if(review.is_complaint):
+            deli.rating = deli.rating - 1
+        else:
+            deli.rating = deli.rating + 1
+        deli.save()
+
+    # verify that they don't surpass the warnings metric
+    return redirect('manager_dashboard')
+
+
+def rejectReview(request, pk):
+
+    review = EmployeeReview.objects.get(pk=int(pk))
+    reviewer = User.objects.get(username=review.review_order.complainee)
+    reviewer.rating = reviewer.rating - 1
+    review.save()
+
+    # verify that they don't surpass the warnings metric
+
+    return redirect('manager_dashboard')
