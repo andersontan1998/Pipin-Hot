@@ -45,8 +45,8 @@ class CustSignUpForm(UserCreationForm):
 
 class ChefSignUpForm(UserCreationForm):
     first_name = forms.CharField(required=True, max_length=30)
-    salary = forms.IntegerField(required=True, min_value=BIGINT_MIN, max_value=BIGINT_MAX)
-    rating = forms.IntegerField(required=True)
+    #salary = forms.IntegerField(required=True, min_value=BIGINT_MIN, max_value=BIGINT_MAX)
+    #rating = forms.IntegerField(required=True)
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -59,8 +59,8 @@ class ChefSignUpForm(UserCreationForm):
         user.save()
         chef = Chef.objects.create(user=user)
         chef.first_name = self.cleaned_data.get('first_name')
-        chef.salary = self.cleaned_data.get('salary')
-        chef.rating = self.cleaned_data('salary')
+       #chef.salary = self.cleaned_data.get('salary')
+       #chef.rating = self.cleaned_data('salary')
         chef.save()
 
         return user
