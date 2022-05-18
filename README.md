@@ -30,6 +30,9 @@ tk==0.1.0
 - [x] 9. Each team comes up with a creativity feature of the system to make it more exciting , e.g., smart - phone based system, voice - based features, or efficient route planning for delivery , which is worth 10% of overall score of the final project.
 
 **Sample screenshots (see rest in images folder)**\
+*Login/Register*\
+![alt text](https://github.com/andersontan1998/Pipin-Hot/blob/main/images/image_login1.png)\
+![alt text](https://github.com/andersontan1998/Pipin-Hot/blob/main/images/image_login2.png)\
 *Customer Menu*\
 ![alt text](https://github.com/andersontan1998/Pipin-Hot/blob/main/images/image_customermenu2.png)\
 *Chef Menu*\
